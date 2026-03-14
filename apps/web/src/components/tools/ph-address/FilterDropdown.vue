@@ -77,15 +77,15 @@ const selected = computed(() => props.items.find((i) => i.value === props.modelV
         :title="locked ? 'Unlock' : 'Lock'"
         @click="$emit('toggle-lock')"
       >
-        <LockIconv-if="locked" class="size-3" />
-        <LockOpenIconv-else class="size-3" />
+        <LockIcon v-if="locked" class="size-3" />
+        <LockOpenIcon v-else class="size-3" />
       </Button>
       <button
         v-if="!locked"
         class="text-muted-foreground hover:text-foreground"
         @click="$emit('clear')"
       >
-        <XIconclass="size-3" />
+        <XIcon class="size-3" />
       </button>
     </template>
   </div>

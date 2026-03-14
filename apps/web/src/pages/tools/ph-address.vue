@@ -42,7 +42,7 @@ const stats = [
         <div class="space-y-3">
           <div class="flex items-center gap-2">
             <div class="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
-              <MapPinIconclass="size-4" />
+              <MapPinIcon class="size-4" />
             </div>
             <code class="text-xs bg-muted px-2 py-1 rounded-md font-mono text-muted-foreground">
               @aivangogh/ph-address

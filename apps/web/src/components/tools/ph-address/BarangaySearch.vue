@@ -163,7 +163,7 @@ async function copyShareUrl() {
       <div class="flex items-start justify-between gap-2">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
-            <SearchIconclass="size-4" />
+            <SearchIcon class="size-4" />
             <CardTitle class="text-base">PSGC Search</CardTitle>
           </div>
           <CardDescription>
@@ -178,8 +178,8 @@ async function copyShareUrl() {
             class="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
             @click="copyShareUrl"
           >
-            <ClipboardCheckIconv-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
-            <CopyIconv-else class="size-3.5" />
+            <ClipboardCheckIcon v-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
+            <CopyIcon v-else class="size-3.5" />
             {{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}
           </Button>
           <Button
@@ -189,7 +189,7 @@ async function copyShareUrl() {
             class="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
             @click="clearFilters"
           >
-            <RotateCcwIconclass="size-3.5" />
+            <RotateCcwIcon class="size-3.5" />
             Clear
           </Button>
         </div>
@@ -207,7 +207,7 @@ async function copyShareUrl() {
           @clear="filterRegion = ''"
         />
         <template v-if="filterRegion">
-          <ChevronRightIconclass="size-3.5 text-muted-foreground shrink-0" />
+          <ChevronRightIcon class="size-3.5 text-muted-foreground shrink-0" />
           <FilterDropdown
             v-model="filterProvince"
             :items="provinceItems"
@@ -219,7 +219,7 @@ async function copyShareUrl() {
           />
         </template>
         <template v-if="filterProvince">
-          <ChevronRightIconclass="size-3.5 text-muted-foreground shrink-0" />
+          <ChevronRightIcon class="size-3.5 text-muted-foreground shrink-0" />
           <FilterDropdown
             v-model="filterMunicipality"
             :items="municipalityItems"
@@ -234,7 +234,7 @@ async function copyShareUrl() {
 
       <!-- Search input -->
       <div class="relative">
-        <SearchIconclass="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+        <SearchIcon class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
         <Input
           v-model="rawQuery"
           placeholder="e.g. Poblacion, Makati, Cebu, NCR..."
@@ -249,7 +249,7 @@ async function copyShareUrl() {
       class="flex flex-col items-center justify-center gap-3 px-6 py-14 text-center"
     >
       <div class="flex size-12 items-center justify-center rounded-full bg-muted">
-        <SearchIconclass="size-5 text-muted-foreground" />
+        <SearchIcon class="size-5 text-muted-foreground" />
       </div>
       <div class="space-y-1">
         <p class="text-sm font-medium">Search across 42,000+ barangays</p>
@@ -311,8 +311,8 @@ async function copyShareUrl() {
                 class="size-7 opacity-0 transition-opacity group-hover:opacity-100"
                 @click="copyCode(row.code)"
               >
-                <CheckIconv-if="copiedCode === row.code" class="size-3.5 text-green-500" />
-                <CopyIconv-else class="size-3.5" />
+                <CheckIcon v-if="copiedCode === row.code" class="size-3.5 text-green-500" />
+                <CopyIcon v-else class="size-3.5" />
               </Button>
             </TableCell>
           </TableRow>
@@ -328,7 +328,7 @@ async function copyShareUrl() {
           :disabled="currentPage === 1"
           @click="currentPage--"
         >
-          <ChevronLeftIconclass="size-3.5" />
+          <ChevronLeftIcon class="size-3.5" />
           Prev
         </Button>
         <p class="text-xs text-muted-foreground">
@@ -343,7 +343,7 @@ async function copyShareUrl() {
           @click="currentPage++"
         >
           Next
-          <ChevronRightIconclass="size-3.5" />
+          <ChevronRightIcon class="size-3.5" />
         </Button>
       </div>
     </CardContent>

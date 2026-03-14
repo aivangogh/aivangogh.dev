@@ -187,7 +187,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
         <div class="flex items-start justify-between gap-2">
           <div class="space-y-1">
             <div class="flex items-center gap-2">
-              <MapPinIconclass="size-4" />
+              <MapPinIcon class="size-4" />
               <CardTitle class="text-base">Address Selector</CardTitle>
             </div>
             <CardDescription>
@@ -204,8 +204,8 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
               class="-mt-0.5 h-8 gap-1.5 text-muted-foreground hover:text-foreground"
               @click="copyShareUrl"
             >
-              <ClipboardCheckIconv-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
-              <CopyIconv-else class="size-3.5" />
+              <ClipboardCheckIcon v-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
+              <CopyIcon v-else class="size-3.5" />
               {{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}
             </Button>
             <Button
@@ -215,7 +215,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
               class="-mt-0.5 h-8 gap-1.5 text-muted-foreground hover:text-foreground"
               @click="reset"
             >
-              <RotateCcwIconclass="size-3.5" />
+              <RotateCcwIcon class="size-3.5" />
               Reset
             </Button>
           </div>
@@ -290,7 +290,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
         <div class="flex items-start justify-between gap-2">
           <div class="space-y-1">
             <div class="flex items-center gap-2">
-              <HashIconclass="size-4" />
+              <HashIcon class="size-4" />
               <CardTitle class="text-base">PSGC Code Breakdown</CardTitle>
             </div>
             <CardDescription>PSA geographic code per level.</CardDescription>
@@ -300,7 +300,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
             variant="secondary"
             class="mt-0.5 shrink-0 gap-1"
           >
-            <CheckIconclass="size-3" />
+            <CheckIcon class="size-3" />
             Complete
           </Badge>
         </div>
@@ -312,7 +312,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
         class="flex flex-col items-center justify-center gap-3 px-6 py-16 text-center"
       >
         <div class="flex size-12 items-center justify-center rounded-full bg-muted">
-          <HashIconclass="size-5 text-muted-foreground" />
+          <HashIcon class="size-5 text-muted-foreground" />
         </div>
         <div class="space-y-1">
           <p class="text-sm font-medium">No selection yet</p>
@@ -331,8 +331,8 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
             class="-mt-0.5 size-7 shrink-0 text-muted-foreground hover:text-foreground"
             @click="copyFullAddress"
           >
-            <ClipboardCheckIconv-if="copiedMeta === 'address'" class="size-3.5 text-green-500" />
-            <CopyIconv-else class="size-3.5" />
+            <ClipboardCheckIcon v-if="copiedMeta === 'address'" class="size-3.5 text-green-500" />
+            <CopyIcon v-else class="size-3.5" />
           </Button>
         </div>
 
@@ -373,8 +373,8 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
                   class="size-7 opacity-0 transition-opacity group-hover:opacity-100"
                   @click="copyCode(row.code)"
                 >
-                  <CheckIconv-if="copiedCode === row.code" class="size-3.5 text-green-500" />
-                  <CopyIconv-else class="size-3.5" />
+                  <CheckIcon v-if="copiedCode === row.code" class="size-3.5 text-green-500" />
+                  <CopyIcon v-else class="size-3.5" />
                 </Button>
               </TableCell>
             </TableRow>

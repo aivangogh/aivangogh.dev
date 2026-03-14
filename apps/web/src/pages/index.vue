@@ -4,9 +4,10 @@ import { MapPinIcon, PackageIcon } from 'lucide-vue-next'
 const tools = [
   {
     to: '/tools/ph-address',
-    icon: MapPin,
+    icon: MapPinIcon,
     name: 'PH Address — PSGC Lookup',
-    description: 'Interactive lookup for Philippine geographic codes. Search and browse 42,000+ barangays with shareable, pre-filtered URLs.',
+    description:
+      'Interactive lookup for Philippine geographic codes. Search and browse 42,000+ barangays with shareable, pre-filtered URLs.',
     pkg: '@aivangogh/ph-address',
     external: false,
   },
@@ -16,7 +17,8 @@ const packages = [
   {
     href: 'https://www.npmjs.com/package/@aivangogh/ph-address',
     name: '@aivangogh/ph-address',
-    description: 'Philippine geographic data based on PSGC — regions, provinces, municipalities, and barangays. Zero dependencies.',
+    description:
+      'Philippine geographic data based on PSGC — regions, provinces, municipalities, and barangays. Zero dependencies.',
   },
 ]
 </script>
@@ -74,7 +76,7 @@ const packages = [
           <div class="space-y-3">
             <div class="flex items-start justify-between gap-3">
               <div class="flex size-8 items-center justify-center border border-border bg-muted group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-colors">
-                <Package class="size-4" />
+                <PackageIcon class="size-4" />
               </div>
               <span class="text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-1">↗</span>
             </div>
