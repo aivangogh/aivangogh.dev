@@ -188,7 +188,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
           <div class="space-y-1">
             <div class="flex items-center gap-2">
               <MapPinIcon class="size-4" />
-              <CardTitle class="text-base">Address Selector</CardTitle>
+              <CardTitle class="text-sm">Address Selector</CardTitle>
             </div>
             <CardDescription>
               Select each level to retrieve the
@@ -291,7 +291,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
           <div class="space-y-1">
             <div class="flex items-center gap-2">
               <HashIcon class="size-4" />
-              <CardTitle class="text-base">PSGC Code Breakdown</CardTitle>
+              <CardTitle class="text-sm">PSGC Code Breakdown</CardTitle>
             </div>
             <CardDescription>PSA geographic code per level.</CardDescription>
           </div>
@@ -315,7 +315,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
           <HashIcon class="size-5 text-muted-foreground" />
         </div>
         <div class="space-y-1">
-          <p class="text-sm font-medium">No selection yet</p>
+          <p class="text-xs font-medium">No selection yet</p>
           <p class="text-xs text-muted-foreground">Start by selecting a region on the left.</p>
         </div>
       </div>
@@ -324,7 +324,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
       <CardContent v-else class="space-y-4">
         <!-- Full address banner -->
         <div class="flex items-start gap-2 rounded-md bg-muted px-3 py-2.5">
-          <p class="flex-1 text-sm font-medium leading-relaxed">{{ fullAddress }}</p>
+          <p class="flex-1 text-xs font-medium leading-relaxed">{{ fullAddress }}</p>
           <Button
             variant="ghost"
             size="icon"
@@ -358,11 +358,11 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
                 </Badge>
               </TableCell>
               <TableCell>
-                <p class="text-sm font-medium leading-none">{{ row.name }}</p>
-                <p v-if="row.sub" class="mt-0.5 text-xs text-muted-foreground">{{ row.sub }}</p>
+                <p class="text-xs font-medium leading-none">{{ row.name }}</p>
+                <p v-if="row.sub" class="mt-0.5 text-[10px] text-muted-foreground">{{ row.sub }}</p>
               </TableCell>
               <TableCell class="pr-2 text-right">
-                <code class="font-mono text-sm font-semibold tabular-nums tracking-widest">
+                <code class="font-mono text-xs font-semibold tabular-nums tracking-widest">
                   {{ row.code }}
                 </code>
               </TableCell>

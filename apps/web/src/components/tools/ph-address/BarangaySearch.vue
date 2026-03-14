@@ -164,7 +164,7 @@ async function copyShareUrl() {
         <div class="space-y-1">
           <div class="flex items-center gap-2">
             <SearchIcon class="size-4" />
-            <CardTitle class="text-base">PSGC Search</CardTitle>
+            <CardTitle class="text-sm">PSGC Search</CardTitle>
           </div>
           <CardDescription>
             Search by barangay, municipality/city, province, or region. Use scope filters to narrow results.
@@ -252,7 +252,7 @@ async function copyShareUrl() {
         <SearchIcon class="size-5 text-muted-foreground" />
       </div>
       <div class="space-y-1">
-        <p class="text-sm font-medium">Search across 42,000+ barangays</p>
+        <p class="text-xs font-medium">Search across 42,000+ barangays</p>
         <p class="text-xs text-muted-foreground">Enter at least 2 characters, or pick a scope filter above.</p>
       </div>
     </div>
@@ -262,7 +262,7 @@ async function copyShareUrl() {
       v-else-if="results.length === 0"
       class="flex flex-col items-center justify-center gap-3 px-6 py-14 text-center"
     >
-      <p class="text-sm font-medium">
+      <p class="text-xs font-medium">
         No barangays found<span v-if="query"> for "<span class="text-foreground">{{ query }}</span>"</span>
       </p>
       <p class="text-xs text-muted-foreground">Try a different spelling or adjust the scope filter.</p>
@@ -296,11 +296,11 @@ async function copyShareUrl() {
             :key="row.code"
             class="group hover:bg-muted/40"
           >
-            <TableCell class="font-medium text-sm">{{ row.name }}</TableCell>
-            <TableCell class="text-sm text-muted-foreground">{{ row.municipality }}</TableCell>
-            <TableCell class="text-sm text-muted-foreground">{{ row.province }}</TableCell>
+            <TableCell class="font-medium text-xs">{{ row.name }}</TableCell>
+            <TableCell class="text-xs text-muted-foreground">{{ row.municipality }}</TableCell>
+            <TableCell class="text-xs text-muted-foreground">{{ row.province }}</TableCell>
             <TableCell class="text-right pr-2">
-              <code class="font-mono text-sm font-semibold tabular-nums tracking-widest">
+              <code class="font-mono text-xs font-semibold tabular-nums tracking-widest">
                 {{ row.code }}
               </code>
             </TableCell>
