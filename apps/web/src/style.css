@@ -7,24 +7,24 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f8f8f8;
+  --background: #eeeeee;
   --foreground: #111111;
-  --card: #f0f0f0;
+  --card: #ffffff;
   --card-foreground: #111111;
-  --popover: #f0f0f0;
+  --popover: #ffffff;
   --popover-foreground: #111111;
   --primary: #111111;
-  --primary-foreground: #f8f8f8;
-  --secondary: #e8e8e8;
+  --primary-foreground: #ffffff;
+  --secondary: #e4e4e4;
   --secondary-foreground: #111111;
-  --muted: #ebebeb;
-  --muted-foreground: #888888;
-  --accent: #e4e4e4;
+  --muted: #e8e8e8;
+  --muted-foreground: #777777;
+  --accent: #e0e0e0;
   --accent-foreground: #111111;
   --destructive: #cc2936;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.10);
-  --input: #ebebeb;
+  --input: #e8e8e8;
   --ring: #111111;
   --font-sans: 'Geist Mono', monospace;
   --font-mono: 'Geist Mono', monospace;
