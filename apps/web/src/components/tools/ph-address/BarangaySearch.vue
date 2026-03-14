@@ -180,7 +180,7 @@ async function copyShareUrl() {
           >
             <ClipboardCheckIcon v-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
             <CopyIcon v-else class="size-3.5" />
-            {{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}
+            <span class="hidden sm:inline">{{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}</span>
           </Button>
           <Button
             v-if="hasFilter"
@@ -190,7 +190,7 @@ async function copyShareUrl() {
             @click="clearFilters"
           >
             <RotateCcwIcon class="size-3.5" />
-            Clear
+            <span class="hidden sm:inline">Clear</span>
           </Button>
         </div>
       </div>
@@ -207,7 +207,7 @@ async function copyShareUrl() {
           @clear="filterRegion = ''"
         />
         <template v-if="filterRegion">
-          <ChevronRightIcon class="size-3.5 text-muted-foreground shrink-0" />
+          <ChevronRightIcon class="size-3 text-muted-foreground shrink-0 sm:size-3.5" />
           <FilterDropdown
             v-model="filterProvince"
             :items="provinceItems"
@@ -219,11 +219,11 @@ async function copyShareUrl() {
           />
         </template>
         <template v-if="filterProvince">
-          <ChevronRightIcon class="size-3.5 text-muted-foreground shrink-0" />
+          <ChevronRightIcon class="size-3 text-muted-foreground shrink-0 sm:size-3.5" />
           <FilterDropdown
             v-model="filterMunicipality"
             :items="municipalityItems"
-            placeholder="Municipality / City"
+            placeholder="Mun. / City"
             search-placeholder="Search..."
             :locked="lockedMunicipality"
             @toggle-lock="toggleLock('m')"
@@ -234,11 +234,11 @@ async function copyShareUrl() {
 
       <!-- Search input -->
       <div class="relative">
-        <SearchIcon class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+        <SearchIcon class="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none sm:size-4" />
         <Input
           v-model="rawQuery"
-          placeholder="e.g. Poblacion, Makati, Cebu, NCR..."
-          class="pl-9"
+          placeholder="Search barangay, city, province..."
+          class="pl-9 text-sm"
         />
       </div>
     </CardHeader>
@@ -270,57 +270,58 @@ async function copyShareUrl() {
 
     <!-- Results -->
     <CardContent v-else class="p-0">
-      <div class="flex items-center justify-between px-6 py-2 border-b bg-muted/30">
+      <div class="flex items-center justify-between px-4 py-2 border-b bg-muted/30 sm:px-6">
         <p class="text-xs text-muted-foreground">
           <span class="font-medium text-foreground">{{ allResults.length.toLocaleString() }}</span> matches
         </p>
         <p class="text-xs text-muted-foreground">
-          Page <span class="font-medium text-foreground">{{ currentPage }}</span> of
-          <span class="font-medium text-foreground">{{ totalPages }}</span>
+          <span class="font-medium text-foreground">{{ currentPage }}</span>/<span class="font-medium text-foreground">{{ totalPages }}</span>
         </p>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow class="hover:bg-transparent">
-            <TableHead class="text-xs">Barangay</TableHead>
-            <TableHead class="text-xs">Municipality / City</TableHead>
-            <TableHead class="text-xs">Province</TableHead>
-            <TableHead class="text-xs text-right pr-2">PSGC Code</TableHead>
-            <TableHead class="w-8" />
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow
-            v-for="row in results"
-            :key="row.code"
-            class="group hover:bg-muted/40"
-          >
-            <TableCell class="font-medium text-xs">{{ row.name }}</TableCell>
-            <TableCell class="text-xs text-muted-foreground">{{ row.municipality }}</TableCell>
-            <TableCell class="text-xs text-muted-foreground">{{ row.province }}</TableCell>
-            <TableCell class="text-right pr-2">
-              <code class="font-mono text-xs font-semibold tabular-nums tracking-widest">
-                {{ row.code }}
-              </code>
-            </TableCell>
-            <TableCell class="pl-0">
-              <Button
-                variant="ghost"
-                size="icon"
-                class="size-7 opacity-0 transition-opacity group-hover:opacity-100"
-                @click="copyCode(row.code)"
-              >
-                <CheckIcon v-if="copiedCode === row.code" class="size-3.5 text-green-500" />
-                <CopyIcon v-else class="size-3.5" />
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+      <div class="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow class="hover:bg-transparent">
+              <TableHead class="text-xs">Barangay</TableHead>
+              <TableHead class="text-xs">Mun. / City</TableHead>
+              <TableHead class="hidden text-xs sm:table-cell">Province</TableHead>
+              <TableHead class="pr-2 text-right text-xs">PSGC Code</TableHead>
+              <TableHead class="w-8" />
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow
+              v-for="row in results"
+              :key="row.code"
+              class="group hover:bg-muted/40"
+            >
+              <TableCell class="text-xs font-medium">{{ row.name }}</TableCell>
+              <TableCell class="text-xs text-muted-foreground">{{ row.municipality }}</TableCell>
+              <TableCell class="hidden text-xs text-muted-foreground sm:table-cell">{{ row.province }}</TableCell>
+              <TableCell class="pr-2 text-right">
+                <code class="font-mono text-xs font-semibold tabular-nums tracking-widest">
+                  {{ row.code }}
+                </code>
+              </TableCell>
+              <TableCell class="pl-0">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  class="size-7 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
+                  @click="copyCode(row.code)"
+                >
+                  <CheckIcon v-if="copiedCode === row.code" class="size-3.5 text-green-500" />
+                  <CopyIcon v-else class="size-3.5" />
+                </Button>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
 
       <!-- Pagination -->
-      <div v-if="totalPages > 1" class="flex items-center justify-between px-6 py-3 border-t">
+      <div v-if="totalPages > 1" class="flex items-center justify-between px-4 py-3 border-t sm:px-6">
         <Button
           variant="outline"
           size="sm"

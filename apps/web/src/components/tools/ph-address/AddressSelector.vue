@@ -206,7 +206,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
             >
               <ClipboardCheckIcon v-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
               <CopyIcon v-else class="size-3.5" />
-              {{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}
+              <span class="hidden sm:inline">{{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}</span>
             </Button>
             <Button
               v-if="completedSteps > 0"
@@ -216,7 +216,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
               @click="reset"
             >
               <RotateCcwIcon class="size-3.5" />
-              Reset
+              <span class="hidden sm:inline">Reset</span>
             </Button>
           </div>
         </div>
@@ -370,7 +370,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
                 <Button
                   variant="ghost"
                   size="icon"
-                  class="size-7 opacity-0 transition-opacity group-hover:opacity-100"
+                  class="size-7 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
                   @click="copyCode(row.code)"
                 >
                   <CheckIcon v-if="copiedCode === row.code" class="size-3.5 text-green-500" />
