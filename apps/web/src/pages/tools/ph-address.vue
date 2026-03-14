@@ -27,8 +27,7 @@ const stats = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
-    <div class="max-w-5xl mx-auto px-4 py-12 space-y-10">
+  <div class="max-w-5xl mx-auto px-4 py-12 space-y-10">
 
       <!-- Back -->
       <RouterLink
@@ -88,18 +87,5 @@ const stats = [
         </TabsContent>
       </Tabs>
 
-      <!-- Footer -->
-      <div class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground pt-4 border-t border-border">
-        <span>Powered by</span>
-        <a
-          href="https://www.npmjs.com/package/@aivangogh/ph-address"
-          target="_blank"
-          class="font-mono underline underline-offset-2 hover:text-foreground transition-colors"
-        >@aivangogh/ph-address</a>
-        <span>·</span>
-        <span>Built with Vue 3 + shadcn-vue</span>
-      </div>
-
-    </div>
   </div>
 </template>
