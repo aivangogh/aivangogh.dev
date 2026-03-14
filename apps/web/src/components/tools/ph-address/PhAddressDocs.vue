@@ -20,11 +20,11 @@ const html = marked.parse(cleanedReadme) as string
 
 <style scoped>
 .ph-docs :deep(.prose) {
-  --prose-body: theme(colors.foreground);
-  --prose-headings: theme(colors.foreground);
-  --prose-code: theme(colors.primary);
-  --prose-pre-bg: theme(colors.muted.DEFAULT);
-  --prose-border: theme(colors.border);
+  --prose-body: var(--foreground);
+  --prose-headings: var(--foreground);
+  --prose-code: var(--primary);
+  --prose-pre-bg: var(--muted);
+  --prose-border: var(--border);
 
   max-width: none;
   color: var(--prose-body);
@@ -59,11 +59,11 @@ const html = marked.parse(cleanedReadme) as string
 
 .ph-docs :deep(p) {
   margin-bottom: 0.75rem;
-  color: theme(colors.muted.foreground);
+  color: var(--muted-foreground);
 }
 
 .ph-docs :deep(a) {
-  color: theme(colors.primary.DEFAULT);
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: opacity 0.15s;
@@ -77,7 +77,7 @@ const html = marked.parse(cleanedReadme) as string
 .ph-docs :deep(ol) {
   margin-bottom: 0.75rem;
   padding-left: 1.25rem;
-  color: theme(colors.muted.foreground);
+  color: var(--muted-foreground);
 }
 
 .ph-docs :deep(li) {
@@ -100,15 +100,15 @@ const html = marked.parse(cleanedReadme) as string
 .ph-docs :deep(code) {
   font-family: ui-monospace, monospace;
   font-size: 0.8125rem;
-  background-color: theme(colors.muted.DEFAULT);
+  background-color: var(--muted);
   color: var(--prose-code);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
 }
 
 .ph-docs :deep(pre) {
-  background-color: theme(colors.muted.DEFAULT);
-  border: 1px solid theme(colors.border);
+  background-color: var(--muted);
+  border: 1px solid var(--border);
   border-radius: 0.375rem;
   padding: 1rem;
   overflow-x: auto;
@@ -119,19 +119,19 @@ const html = marked.parse(cleanedReadme) as string
   background: none;
   padding: 0;
   font-size: 0.8125rem;
-  color: theme(colors.foreground);
+  color: var(--foreground);
 }
 
 .ph-docs :deep(hr) {
   border: none;
-  border-top: 1px solid theme(colors.border);
+  border-top: 1px solid var(--border);
   margin: 1.5rem 0;
 }
 
 .ph-docs :deep(blockquote) {
-  border-left: 3px solid theme(colors.border);
+  border-left: 3px solid var(--border);
   padding-left: 1rem;
-  color: theme(colors.muted.foreground);
+  color: var(--muted-foreground);
   margin-bottom: 0.75rem;
 }
 
@@ -146,13 +146,13 @@ const html = marked.parse(cleanedReadme) as string
   text-align: left;
   padding: 0.5rem 0.75rem;
   font-weight: 600;
-  border-bottom: 1px solid theme(colors.border);
+  border-bottom: 1px solid var(--border);
   color: var(--prose-headings);
 }
 
 .ph-docs :deep(td) {
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid theme(colors.border);
-  color: theme(colors.muted.foreground);
+  border-bottom: 1px solid var(--border);
+  color: var(--muted-foreground);
 }
 </style>
