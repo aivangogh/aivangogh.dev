@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import {
   getAllRegions,
   getProvincesByRegion,
@@ -26,25 +27,85 @@ import { Button } from '@aivangogh/ui/components/ui/button'
 import { Check, ClipboardCheck, Copy, Hash, MapPin, RotateCcw } from 'lucide-vue-next'
 import AddressCombobox from './AddressCombobox.vue'
 
-// — State —
-const regionCode = ref('')
-const provinceCode = ref('')
-const municipalityCode = ref('')
-const barangayCode = ref('')
+const route = useRoute()
+const router = useRouter()
 
-// — Cascade resets —
+// — Hydrate state from URL on init —
+const lockParam = ((route.query.lock as string) || '').split(',')
+
+const regionCode = ref((route.query.r as string) || '')
+const provinceCode = ref((route.query.p as string) || '')
+const municipalityCode = ref((route.query.m as string) || '')
+const barangayCode = ref((route.query.b as string) || '')
+
+const lockedRegion = ref(lockParam.includes('r'))
+const lockedProvince = ref(lockParam.includes('p'))
+const lockedMunicipality = ref(lockParam.includes('m'))
+
+// — Cascade resets (only fire on user-driven changes after init) —
 watch(regionCode, () => {
   provinceCode.value = ''
   municipalityCode.value = ''
   barangayCode.value = ''
+  lockedProvince.value = false
+  lockedMunicipality.value = false
 })
 watch(provinceCode, () => {
   municipalityCode.value = ''
   barangayCode.value = ''
+  lockedMunicipality.value = false
 })
 watch(municipalityCode, () => {
   barangayCode.value = ''
 })
+
+// — Lock toggles (locking a child auto-locks ancestors; unlocking a parent auto-unlocks children) —
+function toggleLock(level: 'r' | 'p' | 'm') {
+  if (level === 'r') {
+    if (lockedRegion.value) {
+      lockedRegion.value = false
+      lockedProvince.value = false
+      lockedMunicipality.value = false
+    } else {
+      lockedRegion.value = true
+    }
+  } else if (level === 'p') {
+    if (lockedProvince.value) {
+      lockedProvince.value = false
+      lockedMunicipality.value = false
+    } else {
+      lockedProvince.value = true
+      lockedRegion.value = true
+    }
+  } else {
+    if (lockedMunicipality.value) {
+      lockedMunicipality.value = false
+    } else {
+      lockedMunicipality.value = true
+      lockedProvince.value = true
+      lockedRegion.value = true
+    }
+  }
+}
+
+// — Sync state → URL —
+watch(
+  [regionCode, provinceCode, municipalityCode, barangayCode, lockedRegion, lockedProvince, lockedMunicipality],
+  () => {
+    const q: Record<string, string | undefined> = { ...route.query as Record<string, string> }
+    if (regionCode.value) q.r = regionCode.value; else delete q.r
+    if (provinceCode.value) q.p = provinceCode.value; else delete q.p
+    if (municipalityCode.value) q.m = municipalityCode.value; else delete q.m
+    if (barangayCode.value) q.b = barangayCode.value; else delete q.b
+    const locks = [
+      lockedRegion.value ? 'r' : null,
+      lockedProvince.value ? 'p' : null,
+      lockedMunicipality.value ? 'm' : null,
+    ].filter(Boolean).join(',')
+    if (locks) q.lock = locks; else delete q.lock
+    router.replace({ query: q })
+  },
+)
 
 // — Dropdown items —
 const regionItems = computed(() =>
@@ -91,6 +152,9 @@ function reset() {
   provinceCode.value = ''
   municipalityCode.value = ''
   barangayCode.value = ''
+  lockedRegion.value = false
+  lockedProvince.value = false
+  lockedMunicipality.value = false
 }
 
 // — PSGC breakdown rows —
@@ -138,6 +202,16 @@ async function copyFullAddress() {
   copiedAddress.value = true
   setTimeout(() => (copiedAddress.value = false), 1500)
 }
+
+// — Share URL —
+const copiedUrl = ref(false)
+async function copyShareUrl() {
+  await navigator.clipboard.writeText(window.location.href)
+  copiedUrl.value = true
+  setTimeout(() => (copiedUrl.value = false), 1500)
+}
+
+const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lockedMunicipality.value)
 </script>
 
 <template>
@@ -155,18 +229,32 @@ async function copyFullAddress() {
             <CardDescription>
               Select each level to retrieve the
               <span class="font-medium text-foreground">PSGC code</span>.
+              Lock levels to share a pre-filled URL.
             </CardDescription>
           </div>
-          <Button
-            v-if="completedSteps > 0"
-            variant="ghost"
-            size="sm"
-            class="-mt-0.5 h-8 gap-1.5 text-muted-foreground hover:text-foreground"
-            @click="reset"
-          >
-            <RotateCcw class="size-3.5" />
-            Reset
-          </Button>
+          <div class="flex items-center gap-1.5">
+            <Button
+              v-if="hasLocks"
+              variant="ghost"
+              size="sm"
+              class="-mt-0.5 h-8 gap-1.5 text-muted-foreground hover:text-foreground"
+              @click="copyShareUrl"
+            >
+              <ClipboardCheck v-if="copiedUrl" class="size-3.5 text-green-500" />
+              <Copy v-else class="size-3.5" />
+              {{ copiedUrl ? 'Copied!' : 'Share URL' }}
+            </Button>
+            <Button
+              v-if="completedSteps > 0"
+              variant="ghost"
+              size="sm"
+              class="-mt-0.5 h-8 gap-1.5 text-muted-foreground hover:text-foreground"
+              @click="reset"
+            >
+              <RotateCcw class="size-3.5" />
+              Reset
+            </Button>
+          </div>
         </div>
 
         <!-- Progress bar -->
@@ -191,6 +279,9 @@ async function copyFullAddress() {
           placeholder="Select a region"
           search-placeholder="Search region..."
           :step="1"
+          :lockable="true"
+          :locked="lockedRegion"
+          @toggle-lock="toggleLock('r')"
         />
         <AddressCombobox
           v-model="provinceCode"
@@ -200,6 +291,9 @@ async function copyFullAddress() {
           search-placeholder="Search province..."
           :disabled="!regionCode"
           :step="2"
+          :lockable="true"
+          :locked="lockedProvince"
+          @toggle-lock="toggleLock('p')"
         />
         <AddressCombobox
           v-model="municipalityCode"
@@ -209,6 +303,9 @@ async function copyFullAddress() {
           search-placeholder="Search..."
           :disabled="!provinceCode"
           :step="3"
+          :lockable="true"
+          :locked="lockedMunicipality"
+          @toggle-lock="toggleLock('m')"
         />
         <AddressCombobox
           v-model="barangayCode"

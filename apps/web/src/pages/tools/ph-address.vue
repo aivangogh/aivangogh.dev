@@ -1,9 +1,22 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { getAllRegions, getAllProvinces } from '@aivangogh/ph-address'
 import AddressSelector from '@/components/tools/ph-address/AddressSelector.vue'
 import BarangaySearch from '@/components/tools/ph-address/BarangaySearch.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@aivangogh/ui/components/ui/tabs'
 import { MapPin } from 'lucide-vue-next'
+
+const route = useRoute()
+const router = useRouter()
+
+const activeTab = ref((route.query.tab as string) || 'selector')
+
+watch(activeTab, (tab) => {
+  const q: Record<string, string | undefined> = { ...route.query as Record<string, string> }
+  if (tab === 'selector') delete q.tab; else q.tab = tab
+  router.replace({ query: q })
+})
 
 const stats = [
   { label: 'Regions', value: getAllRegions().length },
@@ -62,7 +75,7 @@ const stats = [
       </div>
 
       <!-- Tool -->
-      <Tabs default-value="selector">
+      <Tabs v-model="activeTab">
         <TabsList>
           <TabsTrigger value="selector">Address Selector</TabsTrigger>
           <TabsTrigger value="search">PSGC Search</TabsTrigger>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
+import { Check, ChevronsUpDown, Lock, LockOpen } from 'lucide-vue-next'
 import { Popover, PopoverContent, PopoverTrigger } from '@aivangogh/ui/components/ui/popover'
 import {
   Command,
@@ -21,9 +21,14 @@ const props = defineProps<{
   disabled?: boolean
   label: string
   step: number
+  lockable?: boolean
+  locked?: boolean
 }>()
 
-const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
+  'toggle-lock': []
+}>()
 
 const open = ref(false)
 const isCompleted = computed(() => !!props.modelValue)
@@ -74,6 +79,18 @@ function handleSelect(value: string) {
         >
           {{ selected?.meta }}
         </code>
+        <Button
+          v-if="lockable && isCompleted"
+          variant="ghost"
+          size="icon"
+          class="size-5 text-muted-foreground hover:text-foreground"
+          :class="locked ? 'text-foreground' : ''"
+          :title="locked ? 'Unlock this level' : 'Lock this level'"
+          @click.stop="$emit('toggle-lock')"
+        >
+          <Lock v-if="locked" class="size-3" />
+          <LockOpen v-else class="size-3" />
+        </Button>
       </div>
     </div>
 
@@ -84,7 +101,7 @@ function handleSelect(value: string) {
           variant="outline"
           role="combobox"
           :aria-expanded="open"
-          :disabled="disabled"
+          :disabled="disabled || locked"
           class="h-10 w-full justify-between px-3 font-normal transition-colors"
           :class="[
             !selected ? 'text-muted-foreground' : 'text-foreground',

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
+import { useRoute, useRouter } from 'vue-router'
 import {
   getAllRegions,
   getProvincesByRegion,
@@ -62,14 +63,20 @@ function getIndex(): BarangayEntry[] {
 
 const MAX_RESULTS = 50
 
-const rawQuery = ref('')
-const query = ref('')
+const route = useRoute()
+const router = useRouter()
 
-const setQuery = useDebounceFn((val: string) => {
+const rawQuery = ref((route.query.q as string) || '')
+const query = ref(rawQuery.value)
+
+const applyQuery = useDebounceFn((val: string) => {
   query.value = val
+  const q: Record<string, string | undefined> = { ...route.query as Record<string, string> }
+  if (val.trim()) q.q = val.trim(); else delete q.q
+  router.replace({ query: q })
 }, 300)
 
-watch(rawQuery, (val) => setQuery(val))
+watch(rawQuery, applyQuery)
 
 function matches(entry: BarangayEntry, q: string): boolean {
   const haystack = `${entry.name} ${entry.municipality} ${entry.province} ${entry.region}`.toLowerCase()
