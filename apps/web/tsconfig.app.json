@@ -1,12 +1,20 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "baseUrl": ".",
+    "composite": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
   },
-  "include": ["src/**/*", "src/typed-router.d.ts"],
-  "exclude": ["src/**/__tests__/*"]
+  "vueCompilerOptions": {
+    "plugins": [
+      {
+        "name": "vue-router/volar/sfc-typed-router",
+        "options": { "rootDir": "." }
+      }
+    ]
+  }
 }

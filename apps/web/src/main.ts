@@ -1,12 +1,27 @@
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router/auto'
-import { routes } from 'vue-router/auto-routes'
-import App from './App.vue'
 import './style.css'
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
+import { QueryClient, VueQueryPlugin } from '@tanstack/vue-query'
+import { createHead } from '@unhead/vue/client'
+import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+    },
+  },
 })
 
-createApp(App).use(router).mount('#app')
+app.use(createPinia())
+app.use(router)
+app.use(createHead())
+app.use(VueQueryPlugin, { queryClient })
+
+app.mount('#app')
