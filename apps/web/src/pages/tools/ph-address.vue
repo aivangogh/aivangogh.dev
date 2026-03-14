@@ -53,8 +53,8 @@ const stats = [
             @aivangogh/ph-address
           </code>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight text-foreground">PH Address — PSGC Lookup</h1>
-        <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
+        <h1 class="text-2xl font-bold tracking-tight text-foreground font-sans">PH Address — PSGC Lookup</h1>
+        <p class="text-sm text-muted-foreground leading-relaxed max-w-xl font-sans">
           Interactive lookup for Philippine geographic codes based on the
           <a
             href="https://psa.gov.ph/classification/psgc"
@@ -66,7 +66,7 @@ const stats = [
       </div>
 
       <!-- Stats -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 font-sans">
         <div
           v-for="stat in stats"
           :key="stat.label"
@@ -79,7 +79,7 @@ const stats = [
     </div>
 
     <!-- Tool -->
-    <Tabs v-model="activeTab">
+    <Tabs v-model="activeTab" class="font-sans">
       <TabsList>
         <TabsTrigger value="selector">selector</TabsTrigger>
         <TabsTrigger value="search">search</TabsTrigger>
