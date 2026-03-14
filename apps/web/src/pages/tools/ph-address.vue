@@ -5,7 +5,7 @@ import { getAllRegions, getAllProvinces } from '@aivangogh/ph-address'
 import AddressSelector from '@/components/tools/ph-address/AddressSelector.vue'
 import BarangaySearch from '@/components/tools/ph-address/BarangaySearch.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@aivangogh/ui/components/ui/tabs'
-import { MapPin } from 'lucide-vue-next'
+import { MapPinIcon } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
@@ -42,7 +42,7 @@ const stats = [
         <div class="space-y-3">
           <div class="flex items-center gap-2">
             <div class="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
-              <MapPin class="size-4" />
+              <MapPinIconclass="size-4" />
             </div>
             <code class="text-xs bg-muted px-2 py-1 rounded-md font-mono text-muted-foreground">
               @aivangogh/ph-address

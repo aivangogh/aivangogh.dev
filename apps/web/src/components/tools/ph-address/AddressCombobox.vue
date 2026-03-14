@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Check, ChevronsUpDown, Lock, LockOpen } from 'lucide-vue-next'
+import { CheckIcon, ChevronsUpDownIcon, LockIcon, LockOpenIcon } from 'lucide-vue-next'
 import { Popover, PopoverContent, PopoverTrigger } from '@aivangogh/ui/components/ui/popover'
 import {
   Command,
@@ -54,7 +54,7 @@ function handleSelect(value: string) {
               : 'bg-foreground/10 text-foreground'
         "
       >
-        <Check v-if="isCompleted" class="size-3" />
+        <CheckIconv-if="isCompleted" class="size-3" />
         <span v-else>{{ step }}</span>
       </span>
 
@@ -88,8 +88,8 @@ function handleSelect(value: string) {
           :title="locked ? 'Unlock this level' : 'Lock this level'"
           @click.stop="$emit('toggle-lock')"
         >
-          <Lock v-if="locked" class="size-3" />
-          <LockOpen v-else class="size-3" />
+          <LockIconv-if="locked" class="size-3" />
+          <LockOpenIconv-else class="size-3" />
         </Button>
       </div>
     </div>
@@ -109,7 +109,7 @@ function handleSelect(value: string) {
           ]"
         >
           <span class="truncate">{{ selected ? selected.label : placeholder }}</span>
-          <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-40" />
+          <ChevronsUpDownIconclass="ml-2 size-4 shrink-0 opacity-40" />
         </Button>
       </PopoverTrigger>
       <PopoverContent class="p-0" align="start" :style="{ width: 'var(--reka-popper-anchor-width)' }">

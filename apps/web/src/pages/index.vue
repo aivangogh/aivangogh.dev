@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MapPin, Package } from 'lucide-vue-next'
+import { MapPinIcon, PackageIcon } from 'lucide-vue-next'
 
 const tools = [
   {

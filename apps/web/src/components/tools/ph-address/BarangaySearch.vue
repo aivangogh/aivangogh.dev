@@ -25,7 +25,7 @@ import {
 import { Badge } from '@aivangogh/ui/components/ui/badge'
 import { Button } from '@aivangogh/ui/components/ui/button'
 import { Input } from '@aivangogh/ui/components/ui/input'
-import { Check, ChevronLeft, ChevronRight, ClipboardCheck, Copy, RotateCcw, Search } from 'lucide-vue-next'
+import { CheckIcon, ChevronLeftIcon, ChevronRightIcon, ClipboardCheckIcon, CopyIcon, RotateCcwIcon, SearchIcon } from 'lucide-vue-next'
 import FilterDropdown from './FilterDropdown.vue'
 
 const PAGE_SIZE = 50
@@ -163,7 +163,7 @@ async function copyShareUrl() {
       <div class="flex items-start justify-between gap-2">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
-            <Search class="size-4" />
+            <SearchIconclass="size-4" />
             <CardTitle class="text-base">PSGC Search</CardTitle>
           </div>
           <CardDescription>
@@ -178,8 +178,8 @@ async function copyShareUrl() {
             class="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
             @click="copyShareUrl"
           >
-            <ClipboardCheck v-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
-            <Copy v-else class="size-3.5" />
+            <ClipboardCheckIconv-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
+            <CopyIconv-else class="size-3.5" />
             {{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}
           </Button>
           <Button
@@ -189,7 +189,7 @@ async function copyShareUrl() {
             class="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
             @click="clearFilters"
           >
-            <RotateCcw class="size-3.5" />
+            <RotateCcwIconclass="size-3.5" />
             Clear
           </Button>
         </div>
@@ -207,7 +207,7 @@ async function copyShareUrl() {
           @clear="filterRegion = ''"
         />
         <template v-if="filterRegion">
-          <ChevronRight class="size-3.5 text-muted-foreground shrink-0" />
+          <ChevronRightIconclass="size-3.5 text-muted-foreground shrink-0" />
           <FilterDropdown
             v-model="filterProvince"
             :items="provinceItems"
@@ -219,7 +219,7 @@ async function copyShareUrl() {
           />
         </template>
         <template v-if="filterProvince">
-          <ChevronRight class="size-3.5 text-muted-foreground shrink-0" />
+          <ChevronRightIconclass="size-3.5 text-muted-foreground shrink-0" />
           <FilterDropdown
             v-model="filterMunicipality"
             :items="municipalityItems"
@@ -234,7 +234,7 @@ async function copyShareUrl() {
 
       <!-- Search input -->
       <div class="relative">
-        <Search class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+        <SearchIconclass="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
         <Input
           v-model="rawQuery"
           placeholder="e.g. Poblacion, Makati, Cebu, NCR..."
@@ -249,7 +249,7 @@ async function copyShareUrl() {
       class="flex flex-col items-center justify-center gap-3 px-6 py-14 text-center"
     >
       <div class="flex size-12 items-center justify-center rounded-full bg-muted">
-        <Search class="size-5 text-muted-foreground" />
+        <SearchIconclass="size-5 text-muted-foreground" />
       </div>
       <div class="space-y-1">
         <p class="text-sm font-medium">Search across 42,000+ barangays</p>
@@ -311,8 +311,8 @@ async function copyShareUrl() {
                 class="size-7 opacity-0 transition-opacity group-hover:opacity-100"
                 @click="copyCode(row.code)"
               >
-                <Check v-if="copiedCode === row.code" class="size-3.5 text-green-500" />
-                <Copy v-else class="size-3.5" />
+                <CheckIconv-if="copiedCode === row.code" class="size-3.5 text-green-500" />
+                <CopyIconv-else class="size-3.5" />
               </Button>
             </TableCell>
           </TableRow>
@@ -328,7 +328,7 @@ async function copyShareUrl() {
           :disabled="currentPage === 1"
           @click="currentPage--"
         >
-          <ChevronLeft class="size-3.5" />
+          <ChevronLeftIconclass="size-3.5" />
           Prev
         </Button>
         <p class="text-xs text-muted-foreground">
@@ -343,7 +343,7 @@ async function copyShareUrl() {
           @click="currentPage++"
         >
           Next
-          <ChevronRight class="size-3.5" />
+          <ChevronRightIconclass="size-3.5" />
         </Button>
       </div>
     </CardContent>

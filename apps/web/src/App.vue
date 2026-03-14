@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router'
   <div class="min-h-screen bg-background flex flex-col">
 
     <!-- Header -->
-    <header class="border-b border-border">
+    <header class="sticky top-0 z-50 border-b border-border bg-background">
       <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
         <RouterLink
           to="/"
