@@ -1,0 +1,34 @@
+{
+  "name": "@aivangogh/web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -p tsconfig.app.json --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "biome lint .",
+    "check-types": "vue-tsc -p tsconfig.app.json --noEmit"
+  },
+  "dependencies": {
+    "@aivangogh/ui": "catalog:",
+    "@vueuse/core": "catalog:",
+    "lucide-vue-next": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:",
+    "typescript": "catalog:",
+    "unplugin-vue-router": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-vue-devtools": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "biome",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "catalog:"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

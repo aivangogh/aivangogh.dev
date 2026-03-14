@@ -1,0 +1,27 @@
+{
+  "name": "@aivangogh/ui",
+  "version": "0.0.0",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./styles/*": "./src/styles/*",
+    "./components/*": "./src/components/*/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@vueuse/core": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "lucide-vue-next": "catalog:",
+    "reka-ui": "catalog:",
+    "tailwind-merge": "catalog:",
+    "tw-animate-css": "catalog:"
+  }
+}

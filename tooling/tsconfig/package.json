@@ -1,0 +1,13 @@
+{
+  "name": "@aivangogh/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@tsconfig/node24": "catalog:",
+    "@vue/tsconfig": "catalog:"
+  }
+}
