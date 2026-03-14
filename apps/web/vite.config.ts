@@ -40,6 +40,7 @@ function workspaceAliasPlugin(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/',
   plugins: [
     tailwindcss(),
     // VueRouter must come before vue()
