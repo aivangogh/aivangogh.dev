@@ -24,39 +24,53 @@ const packages = [
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+  <div class="max-w-5xl mx-auto px-4 py-16 space-y-16 font-mono">
 
-    <!-- Hero -->
-    <div class="space-y-4 max-w-xl">
-      <p class="text-xs font-mono text-muted-foreground uppercase tracking-widest">aivangogh</p>
-      <h1 class="text-4xl font-semibold tracking-tight">Tools & Packages</h1>
-      <p class="text-muted-foreground leading-relaxed">
-        A collection of open-source tools, Vue components, and npm packages — built for the Philippine developer community and beyond.
-      </p>
+    <!-- Hero — terminal session output -->
+    <div class="space-y-4 max-w-2xl">
+      <div class="space-y-1">
+        <p class="text-xs text-muted-foreground">
+          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
+          <span class="ml-2 text-foreground">whoami</span>
+        </p>
+        <div class="pl-4 pt-1 space-y-2 border-l border-border">
+          <h1 class="text-3xl font-bold text-foreground glow cursor-blink tracking-tight">aivangogh</h1>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            open-source tools, Vue components, and npm packages<br>
+            built for the Philippine developer community and beyond.
+          </p>
+        </div>
+      </div>
     </div>
 
     <!-- Tools -->
     <div class="space-y-4">
-      <h2 class="text-xs font-mono text-muted-foreground uppercase tracking-widest">Tools</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="flex items-center gap-2">
+        <p class="text-xs text-muted-foreground">
+          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
+          <span class="ml-2 text-foreground">ls</span>
+          <span class="ml-1 text-primary">--tools</span>
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <RouterLink
           v-for="tool in tools"
           :key="tool.name"
           :to="tool.to"
-          class="group block border border-border bg-card p-5 hover:border-foreground transition-colors"
+          class="group block border border-border bg-card p-4 hover:border-primary hover:bg-accent transition-all duration-150"
         >
           <div class="space-y-3">
             <div class="flex items-start justify-between gap-3">
-              <div class="flex size-8 items-center justify-center border border-border bg-muted group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-colors">
-                <component :is="tool.icon" class="size-4" />
+              <div class="flex size-7 items-center justify-center border border-border bg-muted group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-150">
+                <component :is="tool.icon" class="size-3.5" />
               </div>
-              <span class="text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-1">→</span>
+              <span class="text-muted-foreground group-hover:text-primary transition-colors text-xs mt-0.5">→</span>
             </div>
-            <div class="space-y-1">
-              <p class="font-medium text-sm">{{ tool.name }}</p>
+            <div class="space-y-1.5">
+              <p class="text-sm text-foreground group-hover:text-primary transition-colors">{{ tool.name }}</p>
               <p class="text-xs text-muted-foreground leading-relaxed">{{ tool.description }}</p>
             </div>
-            <code class="text-[11px] font-mono text-muted-foreground">{{ tool.pkg }}</code>
+            <code class="text-[10px] text-muted-foreground">{{ tool.pkg }}</code>
           </div>
         </RouterLink>
       </div>
@@ -64,24 +78,28 @@ const packages = [
 
     <!-- npm Packages -->
     <div class="space-y-4">
-      <h2 class="text-xs font-mono text-muted-foreground uppercase tracking-widest">npm Packages</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <p class="text-xs text-muted-foreground">
+        <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
+        <span class="ml-2 text-foreground">ls</span>
+        <span class="ml-1 text-primary">--packages</span>
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <a
           v-for="pkg in packages"
           :key="pkg.name"
           :href="pkg.href"
           target="_blank"
-          class="group block border border-border bg-card p-5 hover:border-foreground transition-colors"
+          class="group block border border-border bg-card p-4 hover:border-primary hover:bg-accent transition-all duration-150"
         >
           <div class="space-y-3">
             <div class="flex items-start justify-between gap-3">
-              <div class="flex size-8 items-center justify-center border border-border bg-muted group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-colors">
-                <PackageIcon class="size-4" />
+              <div class="flex size-7 items-center justify-center border border-border bg-muted group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-150">
+                <PackageIcon class="size-3.5" />
               </div>
-              <span class="text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-1">↗</span>
+              <span class="text-muted-foreground group-hover:text-primary transition-colors text-xs mt-0.5">↗</span>
             </div>
-            <div class="space-y-1">
-              <p class="font-medium text-sm font-mono">{{ pkg.name }}</p>
+            <div class="space-y-1.5">
+              <p class="text-sm text-foreground group-hover:text-primary transition-colors">{{ pkg.name }}</p>
               <p class="text-xs text-muted-foreground leading-relaxed">{{ pkg.description }}</p>
             </div>
           </div>

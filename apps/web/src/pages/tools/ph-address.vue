@@ -27,65 +27,70 @@ const stats = [
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-4 py-12 space-y-10">
+  <div class="max-w-5xl mx-auto px-4 py-12 space-y-10 font-mono">
 
-      <!-- Back -->
-      <RouterLink
-        to="/"
-        class="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-      >
-        ← Back
-      </RouterLink>
+    <!-- Back — cd .. style -->
+    <RouterLink
+      to="/"
+      class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+    >
+      <span class="text-primary">$</span> cd ..
+    </RouterLink>
 
-      <!-- Header -->
-      <div class="space-y-6">
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <div class="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
-              <MapPinIcon class="size-4" />
-            </div>
-            <code class="text-xs bg-muted px-2 py-1 rounded-md font-mono text-muted-foreground">
-              @aivangogh/ph-address
-            </code>
+    <!-- Header -->
+    <div class="space-y-6">
+      <div class="space-y-3">
+        <p class="text-xs text-muted-foreground">
+          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~/tools</span><span class="text-muted-foreground">$</span>
+          <span class="ml-2 text-foreground">cat</span>
+          <span class="ml-1 text-primary">ph-address.info</span>
+        </p>
+        <div class="flex items-center gap-2">
+          <div class="flex size-7 items-center justify-center border border-primary bg-muted">
+            <MapPinIcon class="size-3.5 text-primary" />
           </div>
-          <h1 class="text-3xl font-semibold tracking-tight">PH Address — PSGC Lookup</h1>
-          <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
-            Interactive lookup for Philippine geographic codes based on the
-            <a
-              href="https://psa.gov.ph/classification/psgc"
-              target="_blank"
-              class="underline underline-offset-2 hover:text-foreground transition-colors"
-            >Philippine Standard Geographic Code (PSGC)</a>,
-            published by the Philippine Statistics Authority.
-          </p>
+          <code class="text-xs border border-border bg-muted px-2 py-0.5 text-muted-foreground">
+            @aivangogh/ph-address
+          </code>
         </div>
-
-        <!-- Stats -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div
-            v-for="stat in stats"
-            :key="stat.label"
-            class="rounded-lg border border-border bg-card px-4 py-3 space-y-0.5"
-          >
-            <p class="text-xl font-semibold tracking-tight">{{ stat.value }}</p>
-            <p class="text-xs text-muted-foreground">{{ stat.label }}</p>
-          </div>
-        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-foreground glow">PH Address — PSGC Lookup</h1>
+        <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
+          Interactive lookup for Philippine geographic codes based on the
+          <a
+            href="https://psa.gov.ph/classification/psgc"
+            target="_blank"
+            class="text-primary underline underline-offset-2 hover:glow transition-all"
+          >Philippine Standard Geographic Code (PSGC)</a>,
+          published by the Philippine Statistics Authority.
+        </p>
       </div>
 
-      <!-- Tool -->
-      <Tabs v-model="activeTab">
-        <TabsList>
-          <TabsTrigger value="selector">Address Selector</TabsTrigger>
-          <TabsTrigger value="search">PSGC Search</TabsTrigger>
-        </TabsList>
-        <TabsContent value="selector">
-          <AddressSelector />
-        </TabsContent>
-        <TabsContent value="search">
-          <BarangaySearch />
-        </TabsContent>
-      </Tabs>
+      <!-- Stats -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div
+          v-for="stat in stats"
+          :key="stat.label"
+          class="border border-border bg-card px-4 py-3 space-y-0.5"
+        >
+          <p class="text-xl font-bold text-primary glow tracking-tight">{{ stat.value }}</p>
+          <p class="text-xs text-muted-foreground">{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool -->
+    <Tabs v-model="activeTab">
+      <TabsList>
+        <TabsTrigger value="selector">selector</TabsTrigger>
+        <TabsTrigger value="search">search</TabsTrigger>
+      </TabsList>
+      <TabsContent value="selector">
+        <AddressSelector />
+      </TabsContent>
+      <TabsContent value="search">
+        <BarangaySearch />
+      </TabsContent>
+    </Tabs>
 
   </div>
 </template>
