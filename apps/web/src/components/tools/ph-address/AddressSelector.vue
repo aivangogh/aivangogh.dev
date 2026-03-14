@@ -141,10 +141,10 @@ async function copyFullAddress() {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 items-start gap-4 md:grid-cols-2">
+  <div class="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
 
     <!-- Left: Address Selector -->
-    <Card>
+    <Card class="h-full">
       <CardHeader>
         <div class="flex items-start justify-between gap-2">
           <div class="space-y-1">
@@ -223,7 +223,7 @@ async function copyFullAddress() {
     </Card>
 
     <!-- Right: PSGC Code Breakdown -->
-    <Card>
+    <Card class="h-full">
       <!-- border-b triggers [.border-b]:pb-6 in CardHeader — acts as divider -->
       <CardHeader class="border-b">
         <div class="flex items-start justify-between gap-2">
