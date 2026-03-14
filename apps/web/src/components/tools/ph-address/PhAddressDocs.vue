@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { marked } from 'marked'
-import readme from '../../../../../packages/ph-address/README.md?raw'
+import readme from '../../../../../../packages/ph-address/README.md?raw'
 import { Card, CardContent } from '@aivangogh/ui/components/ui/card'
 
 // Strip the HTML badge block at the top (everything before the first `#` heading)
