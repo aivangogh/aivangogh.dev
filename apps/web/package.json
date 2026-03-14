@@ -19,6 +19,7 @@
     "@vee-validate/zod": "catalog:",
     "axios": "catalog:",
     "lucide-vue-next": "catalog:",
+    "marked": "catalog:",
     "pinia": "catalog:",
     "tw-animate-css": "catalog:",
     "vue": "catalog:",

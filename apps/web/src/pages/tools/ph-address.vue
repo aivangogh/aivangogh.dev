@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { getAllRegions, getAllProvinces } from '@aivangogh/ph-address'
 import AddressSelector from '@/components/tools/ph-address/AddressSelector.vue'
 import BarangaySearch from '@/components/tools/ph-address/BarangaySearch.vue'
+import PhAddressDocs from '@/components/tools/ph-address/PhAddressDocs.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@aivangogh/ui/components/ui/tabs'
 import { MapPinIcon } from 'lucide-vue-next'
 
@@ -83,12 +84,16 @@ const stats = [
       <TabsList>
         <TabsTrigger value="selector">selector</TabsTrigger>
         <TabsTrigger value="search">search</TabsTrigger>
+        <TabsTrigger value="docs">docs</TabsTrigger>
       </TabsList>
       <TabsContent value="selector">
         <AddressSelector />
       </TabsContent>
       <TabsContent value="search">
         <BarangaySearch />
+      </TabsContent>
+      <TabsContent value="docs">
+        <PhAddressDocs />
       </TabsContent>
     </Tabs>
 

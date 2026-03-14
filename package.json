@@ -45,6 +45,7 @@
     "embla-carousel-vue": "^8.6.0",
     "jsdom": "^28.1.0",
     "lucide-vue-next": "^0.577.0",
+    "marked": "^15.0.12",
     "npm-run-all2": "^8.0.4",
     "pinia": "^3.0.4",
     "reka-ui": "^2.9.0",

@@ -1,0 +1,3 @@
+[submodule "packages/ph-address"]
+	path = packages/ph-address
+	url = git@github.com:aivangogh/ph-address.git
