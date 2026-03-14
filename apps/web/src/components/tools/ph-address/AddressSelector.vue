@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useLockState } from '@/composables/useLockState'
+import { useClipboard } from '@/composables/useClipboard'
 import {
   getAllRegions,
   getProvincesByRegion,
@@ -59,34 +61,8 @@ watch(municipalityCode, () => {
   barangayCode.value = ''
 })
 
-// — Lock toggles (locking a child auto-locks ancestors; unlocking a parent auto-unlocks children) —
-function toggleLock(level: 'r' | 'p' | 'm') {
-  if (level === 'r') {
-    if (lockedRegion.value) {
-      lockedRegion.value = false
-      lockedProvince.value = false
-      lockedMunicipality.value = false
-    } else {
-      lockedRegion.value = true
-    }
-  } else if (level === 'p') {
-    if (lockedProvince.value) {
-      lockedProvince.value = false
-      lockedMunicipality.value = false
-    } else {
-      lockedProvince.value = true
-      lockedRegion.value = true
-    }
-  } else {
-    if (lockedMunicipality.value) {
-      lockedMunicipality.value = false
-    } else {
-      lockedMunicipality.value = true
-      lockedProvince.value = true
-      lockedRegion.value = true
-    }
-  }
-}
+// — Lock toggles —
+const { toggleLock } = useLockState(lockedRegion, lockedProvince, lockedMunicipality)
 
 // — Sync state → URL —
 watch(
@@ -189,26 +165,14 @@ const fullAddress = computed(() =>
 )
 
 // — Copy helpers —
-const copiedCode = ref('')
-async function copyCode(code: string) {
-  await navigator.clipboard.writeText(code)
-  copiedCode.value = code
-  setTimeout(() => (copiedCode.value = ''), 1500)
-}
+const { copiedKey: copiedCode, copy: copyCode } = useClipboard()
+const { copiedKey: copiedMeta, copy: copyMeta } = useClipboard()
 
-const copiedAddress = ref(false)
 async function copyFullAddress() {
-  await navigator.clipboard.writeText(fullAddress.value)
-  copiedAddress.value = true
-  setTimeout(() => (copiedAddress.value = false), 1500)
+  await copyMeta(fullAddress.value, 'address')
 }
-
-// — Share URL —
-const copiedUrl = ref(false)
 async function copyShareUrl() {
-  await navigator.clipboard.writeText(window.location.href)
-  copiedUrl.value = true
-  setTimeout(() => (copiedUrl.value = false), 1500)
+  await copyMeta(window.location.href, 'url')
 }
 
 const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lockedMunicipality.value)
@@ -240,9 +204,9 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
               class="-mt-0.5 h-8 gap-1.5 text-muted-foreground hover:text-foreground"
               @click="copyShareUrl"
             >
-              <ClipboardCheck v-if="copiedUrl" class="size-3.5 text-green-500" />
+              <ClipboardCheck v-if="copiedMeta === 'url'" class="size-3.5 text-green-500" />
               <Copy v-else class="size-3.5" />
-              {{ copiedUrl ? 'Copied!' : 'Share URL' }}
+              {{ copiedMeta === 'url' ? 'Copied!' : 'Share URL' }}
             </Button>
             <Button
               v-if="completedSteps > 0"
@@ -367,7 +331,7 @@ const hasLocks = computed(() => lockedRegion.value || lockedProvince.value || lo
             class="-mt-0.5 size-7 shrink-0 text-muted-foreground hover:text-foreground"
             @click="copyFullAddress"
           >
-            <ClipboardCheck v-if="copiedAddress" class="size-3.5 text-green-500" />
+            <ClipboardCheck v-if="copiedMeta === 'address'" class="size-3.5 text-green-500" />
             <Copy v-else class="size-3.5" />
           </Button>
         </div>
