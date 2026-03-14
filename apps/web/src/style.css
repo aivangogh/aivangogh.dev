@@ -7,52 +7,28 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Phosphor terminal — always dark */
-  --background: oklch(0.08 0.008 160);
-  --foreground: oklch(0.82 0.16 142);
-  --card: oklch(0.11 0.006 155);
-  --card-foreground: oklch(0.82 0.16 142);
-  --popover: oklch(0.11 0.006 155);
-  --popover-foreground: oklch(0.82 0.16 142);
-  --primary: oklch(0.82 0.20 142);
-  --primary-foreground: oklch(0.08 0.008 160);
-  --secondary: oklch(0.15 0.012 155);
-  --secondary-foreground: oklch(0.82 0.16 142);
-  --muted: oklch(0.15 0.012 155);
-  --muted-foreground: oklch(0.50 0.09 142);
-  --accent: oklch(0.18 0.022 142);
-  --accent-foreground: oklch(0.82 0.16 142);
-  --destructive: oklch(0.63 0.19 23.03);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.22 0.04 142);
-  --input: oklch(0.15 0.012 155);
-  --ring: oklch(0.82 0.20 142);
+  --background: #f8f8f8;
+  --foreground: #111111;
+  --card: #f0f0f0;
+  --card-foreground: #111111;
+  --popover: #f0f0f0;
+  --popover-foreground: #111111;
+  --primary: #111111;
+  --primary-foreground: #f8f8f8;
+  --secondary: #e8e8e8;
+  --secondary-foreground: #111111;
+  --muted: #ebebeb;
+  --muted-foreground: #888888;
+  --accent: #e4e4e4;
+  --accent-foreground: #111111;
+  --destructive: #cc2936;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.10);
+  --input: #ebebeb;
+  --ring: #111111;
   --font-sans: 'Geist Mono', monospace;
   --font-mono: 'Geist Mono', monospace;
   --radius: 0px;
-}
-
-/* Dark variant mirrors root — terminal is always dark */
-.dark {
-  --background: oklch(0.08 0.008 160);
-  --foreground: oklch(0.82 0.16 142);
-  --card: oklch(0.11 0.006 155);
-  --card-foreground: oklch(0.82 0.16 142);
-  --popover: oklch(0.11 0.006 155);
-  --popover-foreground: oklch(0.82 0.16 142);
-  --primary: oklch(0.82 0.20 142);
-  --primary-foreground: oklch(0.08 0.008 160);
-  --secondary: oklch(0.15 0.012 155);
-  --secondary-foreground: oklch(0.82 0.16 142);
-  --muted: oklch(0.15 0.012 155);
-  --muted-foreground: oklch(0.50 0.09 142);
-  --accent: oklch(0.18 0.022 142);
-  --accent-foreground: oklch(0.82 0.16 142);
-  --destructive: oklch(0.63 0.19 23.03);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.22 0.04 142);
-  --input: oklch(0.15 0.012 155);
-  --ring: oklch(0.82 0.20 142);
 }
 
 @theme inline {
@@ -82,7 +58,6 @@
   --radius-lg: 0px;
   --radius-xl: 0px;
 
-  /* No shadows — terminals are flat */
   --shadow-2xs: none;
   --shadow-xs: none;
   --shadow-sm: none;
@@ -106,68 +81,15 @@
   }
 }
 
-/* ─── Terminal animations ─────────────────────────────── */
-
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-@keyframes glow-pulse {
-  0%, 100% {
-    text-shadow:
-      0 0 6px oklch(0.82 0.20 142 / 0.5),
-      0 0 16px oklch(0.82 0.20 142 / 0.25);
-  }
-  50% {
-    text-shadow:
-      0 0 10px oklch(0.82 0.20 142 / 0.85),
-      0 0 28px oklch(0.82 0.20 142 / 0.45),
-      0 0 50px oklch(0.82 0.20 142 / 0.15);
-  }
-}
-
-/* CRT phosphor scanlines — fixed overlay, pointer-events off */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    oklch(0 0 0 / 0.045) 2px,
-    oklch(0 0 0 / 0.045) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
-}
-
 @layer utilities {
-  /* Static phosphor glow */
-  .glow {
-    text-shadow:
-      0 0 8px oklch(0.82 0.20 142 / 0.65),
-      0 0 22px oklch(0.82 0.20 142 / 0.35);
-  }
-
-  /* Breathing glow for logo */
-  .glow-pulse {
-    animation: glow-pulse 2.8s ease-in-out infinite;
-  }
-
-  /* Block cursor blink appended after element */
   .cursor-blink::after {
     content: '█';
     margin-left: 3px;
     animation: blink 1.2s step-end infinite;
-    color: oklch(0.82 0.20 142);
-  }
-
-  /* Dim glow for muted text */
-  .glow-dim {
-    text-shadow:
-      0 0 6px oklch(0.50 0.09 142 / 0.5),
-      0 0 14px oklch(0.50 0.09 142 / 0.2);
   }
 }

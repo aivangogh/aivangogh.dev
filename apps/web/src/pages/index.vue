@@ -34,7 +34,7 @@ const packages = [
           <span class="ml-2 text-foreground">whoami</span>
         </p>
         <div class="pl-4 pt-1 space-y-2 border-l border-border">
-          <h1 class="text-3xl font-bold text-foreground glow cursor-blink tracking-tight">aivangogh</h1>
+          <h1 class="text-3xl font-bold text-foreground cursor-blink tracking-tight">aivangogh</h1>
           <p class="text-sm text-muted-foreground leading-relaxed">
             open-source tools, Vue components, and npm packages<br>
             built for the Philippine developer community and beyond.

@@ -53,13 +53,13 @@ const stats = [
             @aivangogh/ph-address
           </code>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight text-foreground glow">PH Address — PSGC Lookup</h1>
+        <h1 class="text-2xl font-bold tracking-tight text-foreground">PH Address — PSGC Lookup</h1>
         <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
           Interactive lookup for Philippine geographic codes based on the
           <a
             href="https://psa.gov.ph/classification/psgc"
             target="_blank"
-            class="text-primary underline underline-offset-2 hover:glow transition-all"
+            class="text-primary underline underline-offset-2 hover:opacity-75 transition-opacity"
           >Philippine Standard Geographic Code (PSGC)</a>,
           published by the Philippine Statistics Authority.
         </p>
@@ -72,7 +72,7 @@ const stats = [
           :key="stat.label"
           class="border border-border bg-card px-4 py-3 space-y-0.5"
         >
-          <p class="text-xl font-bold text-primary glow tracking-tight">{{ stat.value }}</p>
+          <p class="text-xl font-bold text-primary tracking-tight">{{ stat.value }}</p>
           <p class="text-xs text-muted-foreground">{{ stat.label }}</p>
         </div>
       </div>
