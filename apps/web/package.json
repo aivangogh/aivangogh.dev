@@ -14,6 +14,7 @@
   "dependencies": {
     "@aivangogh/ph-address": "^2025.4.1",
     "@tanstack/vue-query": "catalog:",
+    "@vueuse/core": "catalog:",
     "@unhead/vue": "catalog:",
     "@vee-validate/zod": "catalog:",
     "axios": "catalog:",

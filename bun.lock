@@ -23,6 +23,7 @@
         "@tanstack/vue-query": "catalog:",
         "@unhead/vue": "catalog:",
         "@vee-validate/zod": "catalog:",
+        "@vueuse/core": "catalog:",
         "axios": "catalog:",
         "lucide-vue-next": "catalog:",
         "pinia": "catalog:",
