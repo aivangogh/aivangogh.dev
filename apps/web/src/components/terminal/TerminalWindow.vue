@@ -2,6 +2,7 @@
 import { ref, computed, nextTick, onMounted } from 'vue'
 import { useTerminalStore } from '@/features/terminal/stores/useTerminalStore'
 import { commands } from '@/features/terminal/commands'
+import { isAnimated } from '@/features/terminal/types'
 import TerminalTitleBar from './TerminalTitleBar.vue'
 import TerminalHistory from './TerminalHistory.vue'
 import TerminalInput from './TerminalInput.vue'
@@ -12,10 +13,15 @@ const store = useTerminalStore()
 const inputRef = ref<InstanceType<typeof TerminalInput>>()
 const scrollRef = ref<HTMLDivElement>()
 const mode = ref<'NORMAL' | 'INSERT'>('NORMAL')
+const busy = ref(false)
 
 const lineCount = computed(() =>
   store.session.reduce((acc, e) => acc + (e.command ? 1 : 0) + e.outputs.length, 0),
 )
+
+function sleep(ms: number) {
+  return new Promise<void>(resolve => setTimeout(resolve, ms))
+}
 
 async function scrollToBottom() {
   await nextTick()
@@ -25,7 +31,7 @@ async function scrollToBottom() {
 }
 
 async function handleSubmit(raw: string) {
-  if (!raw) return
+  if (!raw || busy.value) return
 
   if (raw === '^C') {
     store.addEntry({ command: '^C', outputs: [] })
@@ -40,26 +46,47 @@ async function handleSubmit(raw: string) {
   const cmd = commands[name]
   if (!cmd) {
     entry.outputs = [`${name}: command not found. Type 'help' for available commands.`]
-  } else {
-    const result = await Promise.resolve(
-      cmd.execute(args, {
-        inputHistory: store.inputHistory,
-        clearSession: store.clearSession,
-      }),
-    )
-    if (result === '__clear__') {
-      store.clearSession()
-      return
-    }
-    entry.outputs = Array.isArray(result) ? result : [result]
+    store.addEntry(entry)
+    await scrollToBottom()
+    return
   }
 
+  const result = await Promise.resolve(
+    cmd.execute(args, {
+      inputHistory: store.inputHistory,
+      clearSession: store.clearSession,
+    }),
+  )
+
+  if (result === '__clear__') {
+    store.clearSession()
+    return
+  }
+
+  // Animated output — play frames one by one
+  if (isAnimated(result)) {
+    busy.value = true
+    store.addEntry(entry)
+    for (const frame of result.frames) {
+      await sleep(frame.delay)
+      if (frame.type === 'update') {
+        store.updateLast(frame.text)
+      } else {
+        store.appendToLast(frame.text)
+      }
+      await scrollToBottom()
+    }
+    busy.value = false
+    return
+  }
+
+  entry.outputs = Array.isArray(result) ? result : [result]
   store.addEntry(entry)
   await scrollToBottom()
 }
 
 function focusInput() {
-  inputRef.value?.focus()
+  if (!busy.value) inputRef.value?.focus()
 }
 
 onMounted(async () => {
@@ -84,6 +111,7 @@ onMounted(async () => {
     >
       <TerminalHistory :entries="store.session" />
       <TerminalInput
+        v-show="!busy"
         ref="inputRef"
         @submit="handleSubmit"
         @focus="mode = 'INSERT'"
@@ -91,6 +119,6 @@ onMounted(async () => {
       />
     </div>
 
-    <TerminalStatusBar :mode="mode" :lines="lineCount" />
+    <TerminalStatusBar :mode="busy ? 'NORMAL' : mode" :lines="lineCount" />
   </div>
 </template>

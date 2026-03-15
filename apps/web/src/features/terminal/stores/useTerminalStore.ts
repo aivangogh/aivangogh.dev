@@ -20,5 +20,21 @@ export const useTerminalStore = defineStore('terminal', () => {
     session.value = []
   }
 
-  return { session, inputHistory, addEntry, addInputHistory, clearSession }
+  /** Append a new output line to the last entry */
+  function appendToLast(text: string) {
+    const last = session.value[session.value.length - 1]
+    if (last) last.outputs.push(text)
+  }
+
+  /** Replace the last output line of the last entry */
+  function updateLast(text: string) {
+    const last = session.value[session.value.length - 1]
+    if (last && last.outputs.length > 0) {
+      last.outputs[last.outputs.length - 1] = text
+    } else if (last) {
+      last.outputs.push(text)
+    }
+  }
+
+  return { session, inputHistory, addEntry, addInputHistory, clearSession, appendToLast, updateLast }
 })

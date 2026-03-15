@@ -1,3 +1,4 @@
+import { animated } from '../types'
 import type { CommandRegistry } from '../types'
 
 const BANNER = [
@@ -196,7 +197,9 @@ export const commands: CommandRegistry = {
 
   neofetch: {
     description: 'System info with ASCII art',
-    execute: () => neofetch(),
+    execute: () => animated(
+      neofetch().map((text, i) => ({ text, delay: i === 0 ? 0 : 60 }))
+    ),
   },
 
   cowsay: {
@@ -211,38 +214,43 @@ export const commands: CommandRegistry = {
 
   matrix: {
     description: 'Wake up, Neo...',
-    execute: () => [
-      'Wake up, Neo...',
-      '',
-      'The Matrix has you...',
-      '',
-      'Follow the white rabbit.',
-      '',
-      '  01001000 01100101 01101100 01101100 01101111',
-      '  01010111 01101111 01110010 01101100 01100100',
-      '',
-      'Knock knock, Neo.',
-    ],
+    execute: () => animated([
+      { text: 'Wake up, Neo...',                                    delay: 0 },
+      { text: '',                                                   delay: 800 },
+      { text: 'The Matrix has you...',                             delay: 1000 },
+      { text: '',                                                   delay: 700 },
+      { text: 'Follow the white rabbit.',                          delay: 900 },
+      { text: '',                                                   delay: 600 },
+      { text: '  01001000 01100101 01101100 01101100 01101111',    delay: 500 },
+      { text: '  01010111 01101111 01110010 01101100 01100100',    delay: 200 },
+      { text: '',                                                   delay: 600 },
+      { text: 'Knock knock, Neo.',                                  delay: 800 },
+    ]),
   },
 
   hack: {
     description: 'l33t hax0r mode',
-    execute: () => [
-      'Initializing hack sequence...',
-      '',
-      '  [████████████████████] 100%',
-      '',
-      '  ✓ Bypassing firewall',
-      '  ✓ Accessing mainframe',
-      '  ✓ Downloading the internet',
-      '  ✓ Uploading virus to the cloud',
-      '  ✓ Mining crypto on your GPU',
-      '  ✓ Hacking the Gibson',
-      '',
-      'H4CK C0MPL3T3. You are now 1337.',
-      '',
-      '(Just kidding. Please don\'t hack things.)',
-    ],
+    execute: () => animated([
+      { text: 'Initializing hack sequence...',         delay: 0 },
+      { text: '',                                       delay: 400 },
+      { text: '  [░░░░░░░░░░░░░░░░░░░░]  0%',         delay: 200 },
+      { type: 'update', text: '  [████░░░░░░░░░░░░░░░░] 20%', delay: 250 },
+      { type: 'update', text: '  [████████░░░░░░░░░░░░] 40%', delay: 250 },
+      { type: 'update', text: '  [████████████░░░░░░░░] 60%', delay: 250 },
+      { type: 'update', text: '  [████████████████░░░░] 80%', delay: 250 },
+      { type: 'update', text: '  [████████████████████] 100%', delay: 300 },
+      { text: '',                                       delay: 400 },
+      { text: '  ✓ Bypassing firewall',                delay: 200 },
+      { text: '  ✓ Accessing mainframe',               delay: 350 },
+      { text: '  ✓ Downloading the internet',          delay: 400 },
+      { text: '  ✓ Uploading virus to the cloud',      delay: 300 },
+      { text: '  ✓ Mining crypto on your GPU',         delay: 350 },
+      { text: '  ✓ Hacking the Gibson',                delay: 500 },
+      { text: '',                                       delay: 500 },
+      { text: 'H4CK C0MPL3T3. You are now 1337.',     delay: 0 },
+      { text: '',                                       delay: 300 },
+      { text: '(Just kidding. Please don\'t hack things.)', delay: 0 },
+    ]),
   },
 
   sudo: {
