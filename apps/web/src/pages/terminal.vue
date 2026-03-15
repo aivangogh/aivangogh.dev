@@ -7,7 +7,7 @@ const showSubtitle = ref(false)
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-4 py-8 space-y-4 font-mono">
+  <div class="max-w-5xl mx-auto px-4 py-4 md:py-8 space-y-3 md:space-y-4 font-mono">
 
     <!-- Header -->
     <div class="space-y-1">
@@ -20,13 +20,13 @@ const showSubtitle = ref(false)
       </p>
     </div>
 
-    <!-- Terminal -->
-    <div style="aspect-ratio: 16 / 9; min-height: 360px;">
+    <!-- Terminal: tall on mobile, 16:9 on desktop -->
+    <div class="h-[68dvh] md:h-auto md:aspect-video">
       <TerminalWindow />
     </div>
 
-    <!-- Keyboard hints -->
-    <div class="flex flex-wrap items-center gap-x-6 gap-y-1.5 text-[11px] text-muted-foreground">
+    <!-- Keyboard hints — hidden on mobile (no physical keyboard) -->
+    <div class="hidden md:flex flex-wrap items-center gap-x-6 gap-y-1.5 text-[11px] text-muted-foreground">
       <span>
         <kbd class="px-1.5 py-0.5 border border-border text-foreground">Tab</kbd>
         autocomplete
@@ -45,6 +45,11 @@ const showSubtitle = ref(false)
       </span>
       <span class="text-muted-foreground/50">· vim users: <code class="text-muted-foreground">:q :wq :help</code> also work</span>
     </div>
+
+    <!-- Mobile hint -->
+    <p class="md:hidden text-[11px] text-muted-foreground/50">
+      Tap the terminal and type a command. Try <code class="text-muted-foreground">help</code>.
+    </p>
 
   </div>
 </template>
