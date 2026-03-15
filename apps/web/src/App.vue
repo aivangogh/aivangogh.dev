@@ -15,13 +15,6 @@ import { RouterLink } from 'vue-router'
           <span class="text-muted-foreground select-none">~/</span><span class="glow-pulse text-foreground font-semibold">aivangogh</span>
         </RouterLink>
         <nav class="flex items-center gap-3">
-          <RouterLink
-            to="/terminal"
-            class="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            active-class="text-foreground"
-          >
-            [terminal]
-          </RouterLink>
           <a
             href="https://www.npmjs.com/~aivangogh"
             target="_blank"
@@ -58,6 +51,12 @@ import { RouterLink } from 'vue-router'
         <div class="flex items-center gap-2 text-[11px] text-muted-foreground shrink-0">
           <span class="hidden sm:inline">vue3 + shadcn-vue</span>
           <span class="opacity-40 hidden sm:inline">|</span>
+          <RouterLink
+            to="/terminal"
+            class="hover:text-foreground transition-colors"
+            active-class="text-foreground"
+          >[terminal]</RouterLink>
+          <span class="opacity-40">|</span>
           <span>© 2026 aivangogh</span>
         </div>
       </div>
