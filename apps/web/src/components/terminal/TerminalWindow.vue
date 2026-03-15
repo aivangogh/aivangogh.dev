@@ -73,7 +73,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="flex flex-col border border-border bg-background overflow-hidden h-full"
+    class="dark flex flex-col border border-border bg-background overflow-hidden h-full"
     @click="focusInput"
   >
     <TerminalTitleBar />
