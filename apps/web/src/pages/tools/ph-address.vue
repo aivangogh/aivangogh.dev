@@ -4,9 +4,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { getAllRegions, getAllProvinces } from '@aivangogh/ph-address'
 import AddressSelector from '@/components/tools/ph-address/AddressSelector.vue'
 import BarangaySearch from '@/components/tools/ph-address/BarangaySearch.vue'
-import PhAddressDocs from '@/components/tools/ph-address/PhAddressDocs.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@aivangogh/ui/components/ui/tabs'
-import { MapPinIcon } from 'lucide-vue-next'
+import { BookOpenIcon, MapPinIcon } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
@@ -30,13 +29,22 @@ const stats = [
 <template>
   <div class="max-w-5xl mx-auto px-4 py-12 space-y-10 font-mono">
 
-    <!-- Back — cd .. style -->
-    <RouterLink
-      to="/"
-      class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-    >
-      <span class="text-primary">$</span> cd ..
-    </RouterLink>
+    <!-- Nav row -->
+    <div class="flex items-center justify-between">
+      <RouterLink
+        to="/"
+        class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <span class="text-primary">$</span> cd ..
+      </RouterLink>
+      <RouterLink
+        to="/tools/ph-address-docs"
+        class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <BookOpenIcon class="size-3.5" />
+        docs
+      </RouterLink>
+    </div>
 
     <!-- Header -->
     <div class="space-y-6">
@@ -84,16 +92,12 @@ const stats = [
       <TabsList>
         <TabsTrigger value="selector">selector</TabsTrigger>
         <TabsTrigger value="search">search</TabsTrigger>
-        <TabsTrigger value="docs">docs</TabsTrigger>
       </TabsList>
       <TabsContent value="selector">
         <AddressSelector />
       </TabsContent>
       <TabsContent value="search">
         <BarangaySearch />
-      </TabsContent>
-      <TabsContent value="docs">
-        <PhAddressDocs />
       </TabsContent>
     </Tabs>
 
