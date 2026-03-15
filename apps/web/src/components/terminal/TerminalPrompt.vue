@@ -58,12 +58,12 @@ onMounted(() => {
 
 <template>
   <p class="text-xs leading-5 font-mono">
-    <span class="text-yellow-500">{{ user }}</span>
-    <span class="text-muted-foreground/50">@</span>
-    <span class="text-green-500">{{ host }}</span>
-    <span class="text-muted-foreground/50">:</span>
-    <span class="text-blue-400">{{ path }}</span>
-    <span class="text-muted-foreground">$</span>
+    <span class="text-yellow-600 dark:text-yellow-400">{{ user }}</span>
+    <span class="text-muted-foreground/70">@</span>
+    <span class="text-green-700 dark:text-green-400">{{ host }}</span>
+    <span class="text-muted-foreground/70">:</span>
+    <span class="text-blue-600 dark:text-blue-400">{{ path }}</span>
+    <span class="text-foreground/60">$</span>
     <span class="ml-2 text-foreground">{{ typedCommand }}</span>
     <span v-if="typedArgs" class="ml-1 text-primary">{{ typedArgs }}</span>
     <span
