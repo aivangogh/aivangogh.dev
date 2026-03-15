@@ -37,6 +37,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/tools/ph-address-docs': RouteRecordInfo<
+      '/tools/ph-address-docs',
+      '/tools/ph-address-docs',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -59,6 +66,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/tools/ph-address.vue': {
       routes:
         | '/tools/ph-address'
+      views:
+        | never
+    }
+    'src/pages/tools/ph-address-docs.vue': {
+      routes:
+        | '/tools/ph-address-docs'
       views:
         | never
     }
