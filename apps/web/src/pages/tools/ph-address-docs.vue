@@ -55,7 +55,7 @@ const tocOpen = ref(false)
   <div class="min-h-screen font-sans">
 
     <!-- Page subheader -->
-    <div class="border-b">
+    <div class="sticky top-11 z-10 border-b bg-background/95 backdrop-blur-sm">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-2">
         <RouterLink
           to="/tools/ph-address"
@@ -75,7 +75,7 @@ const tocOpen = ref(false)
 
       <!-- Sidebar (desktop) -->
       <aside class="hidden w-52 shrink-0 lg:block">
-        <div class="sticky top-11 max-h-[calc(100vh-2.75rem)] overflow-y-auto border-r py-8 pr-4">
+        <div class="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto border-r py-8 pr-4">
           <!-- Sidebar header -->
           <div class="mb-4 space-y-1 pl-2">
             <div class="flex items-center gap-1.5">
@@ -200,7 +200,7 @@ const tocOpen = ref(false)
   margin-bottom: 0.75rem;
   padding-bottom: 0.375rem;
   border-bottom: 1px solid var(--border);
-  scroll-margin-top: 3rem;
+  scroll-margin-top: 5rem;
 }
 
 .ph-docs-content :deep(h3) {
@@ -209,7 +209,7 @@ const tocOpen = ref(false)
   color: var(--foreground);
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
-  scroll-margin-top: 3rem;
+  scroll-margin-top: 5rem;
 }
 
 .ph-docs-content :deep(p) {
