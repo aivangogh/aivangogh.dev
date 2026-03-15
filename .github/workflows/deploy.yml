@@ -36,7 +36,7 @@ jobs:
         run: bun install
 
       - name: Build
-        run: bunx turbo build --filter=web
+        run: bunx turbo build --filter=web --filter=!@aivangogh/ph-address
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
