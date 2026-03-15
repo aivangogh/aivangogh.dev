@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { marked, Renderer } from 'marked'
-import { BookOpenIcon, ExternalLinkIcon } from 'lucide-vue-next'
+import { BookOpenIcon } from 'lucide-vue-next'
 import readme from '../../../../../packages/ph-address/README.md?raw'
 
 // — Strip HTML badge block before first `#` heading —
@@ -54,40 +54,49 @@ const tocOpen = ref(false)
 <template>
   <div class="min-h-screen font-sans">
 
-    <!-- Top bar -->
-    <header class="sticky top-0 z-20 border-b bg-background/90 backdrop-blur">
-      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <div class="flex items-center gap-3">
-          <RouterLink
-            to="/tools/ph-address"
-            class="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <span class="text-primary">$</span> cd ..
-          </RouterLink>
-          <span class="text-border">|</span>
-          <div class="flex items-center gap-1.5">
-            <BookOpenIcon class="size-3.5 text-muted-foreground" />
-            <span class="text-xs font-medium">@aivangogh/ph-address</span>
-            <span class="text-xs text-muted-foreground">— docs</span>
-          </div>
-        </div>
-        <a
-          href="https://www.npmjs.com/package/@aivangogh/ph-address"
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+    <!-- Page subheader -->
+    <div class="border-b">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-2">
+        <RouterLink
+          to="/tools/ph-address"
+          class="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
         >
-          npm
-          <ExternalLinkIcon class="size-3" />
-        </a>
+          <span class="text-primary">$</span> cd ..
+        </RouterLink>
+        <div class="flex items-center gap-1.5">
+          <BookOpenIcon class="size-3.5 text-muted-foreground" />
+          <span class="font-mono text-xs">@aivangogh/ph-address</span>
+          <span class="text-xs text-muted-foreground">— docs</span>
+        </div>
       </div>
-    </header>
+    </div>
 
-    <div class="mx-auto flex max-w-6xl gap-0">
+    <div class="mx-auto flex max-w-5xl gap-0">
 
       <!-- Sidebar (desktop) -->
-      <aside class="hidden w-56 shrink-0 lg:block">
-        <div class="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto py-8 pr-4">
+      <aside class="hidden w-52 shrink-0 lg:block">
+        <div class="sticky top-11 max-h-[calc(100vh-2.75rem)] overflow-y-auto border-r py-8 pr-4">
+          <!-- Sidebar header -->
+          <div class="mb-4 space-y-1 pl-2">
+            <div class="flex items-center gap-1.5">
+              <BookOpenIcon class="size-3 text-muted-foreground" />
+              <span class="font-mono text-xs font-semibold">ph-address</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <a
+                href="https://github.com/aivangogh/ph-address"
+                target="_blank"
+                rel="noopener"
+                class="font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+              >[github]</a>
+              <a
+                href="https://www.npmjs.com/package/@aivangogh/ph-address"
+                target="_blank"
+                rel="noopener"
+                class="font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+              >[npm]</a>
+            </div>
+          </div>
           <nav class="space-y-0.5">
             <template v-for="h in headings" :key="h.id">
               <!-- h1 — package title, skip -->
@@ -126,7 +135,7 @@ const tocOpen = ref(false)
       </aside>
 
       <!-- Mobile TOC -->
-      <div class="border-b px-4 py-2 lg:hidden">
+      <div class="w-full border-b px-4 py-2 lg:hidden">
         <button
           type="button"
           class="flex w-full items-center justify-between text-xs text-muted-foreground"
@@ -158,7 +167,7 @@ const tocOpen = ref(false)
       </div>
 
       <!-- Main content -->
-      <main class="min-w-0 flex-1 px-4 py-8 lg:px-10">
+      <main class="min-w-0 flex-1 px-4 py-8 lg:px-8">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div class="ph-docs-content" v-html="html" />
       </main>
@@ -191,7 +200,7 @@ const tocOpen = ref(false)
   margin-bottom: 0.75rem;
   padding-bottom: 0.375rem;
   border-bottom: 1px solid var(--border);
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 3rem;
 }
 
 .ph-docs-content :deep(h3) {
@@ -200,7 +209,7 @@ const tocOpen = ref(false)
   color: var(--foreground);
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 3rem;
 }
 
 .ph-docs-content :deep(p) {
