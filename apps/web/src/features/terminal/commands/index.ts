@@ -209,7 +209,7 @@ export const commands: CommandRegistry = {
 
   fortune: {
     description: 'Print a random quote',
-    execute: () => FORTUNES[Math.floor(Math.random() * FORTUNES.length)],
+    execute: () => FORTUNES[Math.floor(Math.random() * FORTUNES.length)] ?? '',
   },
 
   matrix: {

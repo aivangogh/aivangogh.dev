@@ -39,7 +39,7 @@ async function handleSubmit(raw: string) {
     return
   }
 
-  const [name, ...args] = raw.trim().split(/\s+/)
+  const [name = '', ...args] = raw.trim().split(/\s+/)
   const entry: HistoryEntry = { command: raw, outputs: [] }
   store.addInputHistory(raw)
 
@@ -90,7 +90,7 @@ function focusInput() {
 }
 
 onMounted(async () => {
-  const banner = commands.banner.execute([], { inputHistory: [], clearSession: () => {} })
+  const banner = commands.banner?.execute([], { inputHistory: [], clearSession: () => {} }) ?? []
   const outputs = Array.isArray(banner) ? banner : [banner as string]
   store.addEntry({ command: '', outputs })
   await nextTick()

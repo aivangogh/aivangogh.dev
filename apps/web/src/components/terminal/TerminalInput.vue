@@ -30,7 +30,7 @@ function handleKeydown(e: KeyboardEvent) {
     e.preventDefault()
     if (historyIndex.value < store.inputHistory.length - 1) {
       historyIndex.value++
-      input.value = store.inputHistory[historyIndex.value]
+      input.value = store.inputHistory[historyIndex.value] ?? ''
     }
   }
 
@@ -38,7 +38,7 @@ function handleKeydown(e: KeyboardEvent) {
     e.preventDefault()
     if (historyIndex.value > 0) {
       historyIndex.value--
-      input.value = store.inputHistory[historyIndex.value]
+      input.value = store.inputHistory[historyIndex.value] ?? ''
     } else {
       historyIndex.value = -1
       input.value = ''
