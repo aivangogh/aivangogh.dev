@@ -5,23 +5,23 @@ defineProps<{ entries: HistoryEntry[] }>()
 </script>
 
 <template>
-  <div class="space-y-1">
-    <div v-for="(entry, i) in entries" :key="i" class="space-y-0.5">
+  <div>
+    <div v-for="(entry, i) in entries" :key="i">
       <!-- Command prompt line -->
-      <div v-if="entry.command" class="flex items-center text-xs flex-wrap gap-0">
+      <div v-if="entry.command" class="flex items-baseline text-[13px] leading-5 flex-wrap">
         <span class="text-yellow-500">guest</span>
-        <span class="text-muted-foreground">@</span>
+        <span class="text-muted-foreground/60">@</span>
         <span class="text-green-500">aivangogh</span>
-        <span class="text-muted-foreground">:</span>
-        <span class="text-primary">~</span>
+        <span class="text-muted-foreground/60">:</span>
+        <span class="text-blue-400">~</span>
         <span class="text-muted-foreground">$</span>
         <span class="ml-2 text-foreground">{{ entry.command }}</span>
       </div>
-      <!-- Output -->
+      <!-- Output lines -->
       <pre
         v-for="(line, j) in entry.outputs"
         :key="j"
-        class="text-xs text-muted-foreground leading-relaxed whitespace-pre-wrap font-mono pl-0"
+        class="text-[13px] leading-5 text-muted-foreground whitespace-pre-wrap font-mono"
       >{{ line }}</pre>
     </div>
   </div>

@@ -5,6 +5,8 @@ import { useTerminalStore } from '@/features/terminal/stores/useTerminalStore'
 
 const emit = defineEmits<{
   submit: [command: string]
+  focus: []
+  blur: []
 }>()
 
 const store = useTerminalStore()
@@ -65,12 +67,12 @@ function handleKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="flex items-center text-xs gap-0">
+  <div class="flex items-baseline text-[13px] leading-5">
     <span class="text-yellow-500 shrink-0">guest</span>
-    <span class="text-muted-foreground shrink-0">@</span>
+    <span class="text-muted-foreground/60 shrink-0">@</span>
     <span class="text-green-500 shrink-0">aivangogh</span>
-    <span class="text-muted-foreground shrink-0">:</span>
-    <span class="text-primary shrink-0">~</span>
+    <span class="text-muted-foreground/60 shrink-0">:</span>
+    <span class="text-blue-400 shrink-0">~</span>
     <span class="text-muted-foreground shrink-0">$</span>
     <input
       ref="inputEl"
@@ -80,8 +82,10 @@ function handleKeydown(e: KeyboardEvent) {
       autocorrect="off"
       autocapitalize="off"
       spellcheck="false"
-      class="ml-2 flex-1 bg-transparent text-foreground outline-none caret-primary text-xs font-mono min-w-0"
+      class="ml-2 flex-1 bg-transparent text-foreground outline-none caret-green-400 text-[13px] font-mono min-w-0"
       @keydown="handleKeydown"
+      @focus="emit('focus')"
+      @blur="emit('blur')"
     />
   </div>
 </template>

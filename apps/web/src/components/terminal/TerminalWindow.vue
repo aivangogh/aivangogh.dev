@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { ref, nextTick, onMounted } from 'vue'
+import { ref, computed, nextTick, onMounted } from 'vue'
 import { useTerminalStore } from '@/features/terminal/stores/useTerminalStore'
 import { commands } from '@/features/terminal/commands'
 import TerminalTitleBar from './TerminalTitleBar.vue'
 import TerminalHistory from './TerminalHistory.vue'
 import TerminalInput from './TerminalInput.vue'
+import TerminalStatusBar from './TerminalStatusBar.vue'
 import type { HistoryEntry } from '@/features/terminal/types'
 
 const store = useTerminalStore()
 const inputRef = ref<InstanceType<typeof TerminalInput>>()
 const scrollRef = ref<HTMLDivElement>()
+const mode = ref<'NORMAL' | 'INSERT'>('NORMAL')
+
+const lineCount = computed(() =>
+  store.session.reduce((acc, e) => acc + (e.command ? 1 : 0) + e.outputs.length, 0),
+)
 
 async function scrollToBottom() {
   await nextTick()
@@ -71,12 +77,20 @@ onMounted(async () => {
     @click="focusInput"
   >
     <TerminalTitleBar />
+
     <div
       ref="scrollRef"
-      class="flex-1 overflow-y-auto p-4 space-y-2 cursor-text"
+      class="flex-1 overflow-y-auto scrollbar-none px-4 py-3 cursor-text"
     >
       <TerminalHistory :entries="store.session" />
-      <TerminalInput ref="inputRef" @submit="handleSubmit" />
+      <TerminalInput
+        ref="inputRef"
+        @submit="handleSubmit"
+        @focus="mode = 'INSERT'"
+        @blur="mode = 'NORMAL'"
+      />
     </div>
+
+    <TerminalStatusBar :mode="mode" :lines="lineCount" />
   </div>
 </template>

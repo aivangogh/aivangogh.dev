@@ -121,6 +121,13 @@
     animation: blink 1.2s step-end infinite;
   }
 
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Only glow in dark mode */
   .glow-pulse {
     animation: none;
