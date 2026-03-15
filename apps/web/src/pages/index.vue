@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { MapPinIcon, PackageIcon } from 'lucide-vue-next'
+import TerminalPrompt from '@/components/terminal/TerminalPrompt.vue'
 
 const tools = [
   {
@@ -30,10 +31,7 @@ const packages = [
     <div class="space-y-4 max-w-2xl">
       <p class="text-[11px] text-muted-foreground/60 select-none">Last login: Sun Mar 15 00:00:00 2026 on ttys001</p>
       <div class="space-y-1">
-        <p class="text-xs text-muted-foreground">
-          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
-          <span class="ml-2 text-foreground">whoami</span>
-        </p>
+        <TerminalPrompt command="whoami" :delay="0" />
         <div class="pl-4 pt-1 space-y-2 border-l border-border">
           <h1 class="text-3xl font-bold text-foreground cursor-blink tracking-tight">aivangogh</h1>
           <p class="text-sm text-muted-foreground leading-relaxed">
@@ -47,13 +45,7 @@ const packages = [
 
     <!-- Tools -->
     <div class="space-y-4">
-      <div class="flex items-center gap-2">
-        <p class="text-xs text-muted-foreground">
-          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
-          <span class="ml-2 text-foreground">ls</span>
-          <span class="ml-1 text-primary">--tools</span>
-        </p>
-      </div>
+      <TerminalPrompt command="ls" args="--tools" :delay="900" />
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <RouterLink
           v-for="tool in tools"
@@ -81,13 +73,7 @@ const packages = [
 
     <!-- npm Packages -->
     <div class="space-y-4">
-      <div>
-        <p class="text-xs text-muted-foreground">
-          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
-          <span class="ml-2 text-foreground">ls</span>
-          <span class="ml-1 text-primary">--packages</span>
-        </p>
-      </div>
+      <TerminalPrompt command="ls" args="--packages" :delay="1800" />
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <a
           v-for="pkg in packages"

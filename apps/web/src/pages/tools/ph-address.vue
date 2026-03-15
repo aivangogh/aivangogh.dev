@@ -6,6 +6,7 @@ import AddressSelector from '@/components/tools/ph-address/AddressSelector.vue'
 import BarangaySearch from '@/components/tools/ph-address/BarangaySearch.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@aivangogh/ui/components/ui/tabs'
 import { BookOpenIcon, MapPinIcon } from 'lucide-vue-next'
+import TerminalPrompt from '@/components/terminal/TerminalPrompt.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -49,11 +50,7 @@ const stats = [
     <!-- Header -->
     <div class="space-y-6">
       <div class="space-y-3">
-        <p class="text-xs text-muted-foreground">
-          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~/tools</span><span class="text-muted-foreground">$</span>
-          <span class="ml-2 text-foreground">cat</span>
-          <span class="ml-1 text-primary">ph-address.info</span>
-        </p>
+        <TerminalPrompt command="cat" args="ph-address.info" path="~/tools" />
         <div class="flex items-center gap-2">
           <div class="flex size-7 items-center justify-center border border-primary bg-muted">
             <MapPinIcon class="size-3.5 text-primary" />
