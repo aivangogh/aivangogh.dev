@@ -4,6 +4,8 @@ import TerminalWindow from '@/components/terminal/TerminalWindow.vue'
 
 <template>
   <div class="max-w-5xl mx-auto px-4 py-8">
-    <TerminalWindow />
+    <div style="aspect-ratio: 16 / 9; min-height: 360px;">
+      <TerminalWindow />
+    </div>
   </div>
 </template>
