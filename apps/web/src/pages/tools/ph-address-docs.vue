@@ -61,12 +61,12 @@ const tocOpen = ref(false)
           to="/tools/ph-address"
           class="shrink-0 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground group inline-flex items-center gap-0"
         >
-          <span class="text-yellow-600 dark:text-yellow-400">aivangogh</span>
-          <span class="text-muted-foreground/70">@</span>
-          <span class="text-green-700 dark:text-green-400">tools</span>
-          <span class="text-muted-foreground/70">:</span>
-          <span class="text-blue-600 dark:text-blue-400">~/tools/ph-address-docs</span>
-          <span class="text-foreground/60">$</span>
+          <span class="text-foreground">aivangogh</span>
+          <span class="text-muted-foreground">@</span>
+          <span class="text-foreground">tools</span>
+          <span class="text-muted-foreground">:</span>
+          <span class="text-foreground">~/tools/ph-address-docs</span>
+          <span class="text-muted-foreground">$</span>
           <span class="ml-2 group-hover:text-foreground transition-colors">cd ..</span>
         </RouterLink>
         <div class="flex min-w-0 items-center gap-1.5">

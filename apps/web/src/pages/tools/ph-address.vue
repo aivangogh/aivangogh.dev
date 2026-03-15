@@ -36,12 +36,12 @@ const stats = [
         to="/"
         class="inline-flex items-center gap-0 text-xs text-muted-foreground hover:text-foreground transition-colors group"
       >
-        <span class="text-yellow-600 dark:text-yellow-400">aivangogh</span>
-        <span class="text-muted-foreground/70">@</span>
-        <span class="text-green-700 dark:text-green-400">tools</span>
-        <span class="text-muted-foreground/70">:</span>
-        <span class="text-blue-600 dark:text-blue-400">~/tools</span>
-        <span class="text-foreground/60">$</span>
+        <span class="text-foreground">aivangogh</span>
+        <span class="text-muted-foreground">@</span>
+        <span class="text-foreground">tools</span>
+        <span class="text-muted-foreground">:</span>
+        <span class="text-foreground">~/tools</span>
+        <span class="text-muted-foreground">$</span>
         <span class="ml-2 group-hover:text-foreground transition-colors">cd ..</span>
       </RouterLink>
       <RouterLink
