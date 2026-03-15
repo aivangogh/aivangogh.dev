@@ -34,15 +34,9 @@ const stats = [
     <div class="flex items-center justify-between">
       <RouterLink
         to="/"
-        class="inline-flex items-center gap-0 text-xs text-muted-foreground hover:text-foreground transition-colors group"
+        class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
       >
-        <span class="text-foreground">aivangogh</span>
-        <span class="text-muted-foreground">@</span>
-        <span class="text-foreground">tools</span>
-        <span class="text-muted-foreground">:</span>
-        <span class="text-foreground">~/tools</span>
-        <span class="text-muted-foreground">$</span>
-        <span class="ml-2 group-hover:text-foreground transition-colors">cd ..</span>
+        <span>$</span><span>cd ..</span>
       </RouterLink>
       <RouterLink
         to="/tools/ph-address-docs"

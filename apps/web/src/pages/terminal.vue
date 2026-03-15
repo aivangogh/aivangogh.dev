@@ -9,6 +9,14 @@ const showSubtitle = ref(false)
 <template>
   <div class="max-w-5xl mx-auto px-4 py-4 md:py-8 space-y-3 md:space-y-4 font-mono">
 
+    <!-- Back -->
+    <RouterLink
+      to="/"
+      class="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+    >
+      <span>$</span><span>cd ..</span>
+    </RouterLink>
+
     <!-- Header -->
     <div class="space-y-1">
       <TerminalPrompt command="open" args="terminal" @done="showSubtitle = true" />

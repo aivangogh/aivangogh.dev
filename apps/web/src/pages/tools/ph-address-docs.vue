@@ -59,15 +59,9 @@ const tocOpen = ref(false)
       <div class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-2">
         <RouterLink
           to="/tools/ph-address"
-          class="shrink-0 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground group inline-flex items-center gap-0"
+          class="shrink-0 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5"
         >
-          <span class="text-foreground">aivangogh</span>
-          <span class="text-muted-foreground">@</span>
-          <span class="text-foreground">tools</span>
-          <span class="text-muted-foreground">:</span>
-          <span class="text-foreground">~/tools/ph-address-docs</span>
-          <span class="text-muted-foreground">$</span>
-          <span class="ml-2 group-hover:text-foreground transition-colors">cd ..</span>
+          <span>$</span><span>cd ..</span>
         </RouterLink>
         <div class="flex min-w-0 items-center gap-1.5">
           <BookOpenIcon class="size-3.5 shrink-0 text-muted-foreground" />
