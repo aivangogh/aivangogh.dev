@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="min-h-screen bg-background flex flex-col font-mono">
+  <div class="min-h-screen bg-background flex flex-col font-mono terminal-scanlines">
 
     <!-- Terminal header -->
     <header class="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
@@ -38,11 +38,23 @@ import { RouterLink } from 'vue-router'
       <RouterView />
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-border">
-      <div class="max-w-5xl mx-auto px-4 h-11 flex items-center justify-between">
-        <p class="text-xs text-muted-foreground">© 2026 aivangogh</p>
-        <p class="text-xs text-muted-foreground">built with vue3 + shadcn-vue</p>
+    <!-- Footer — terminal status bar -->
+    <footer class="border-t border-border bg-muted/40">
+      <div class="max-w-5xl mx-auto px-4 h-9 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 text-[11px] text-muted-foreground">
+          <span class="flex items-center gap-1">
+            <span class="text-primary font-semibold">NORMAL</span>
+          </span>
+          <span class="opacity-40">|</span>
+          <span>~/aivangogh</span>
+          <span class="opacity-40">|</span>
+          <span class="text-foreground/60">main</span>
+        </div>
+        <div class="flex items-center gap-3 text-[11px] text-muted-foreground">
+          <span>vue3 + shadcn-vue</span>
+          <span class="opacity-40">|</span>
+          <span>© 2026 aivangogh</span>
+        </div>
       </div>
     </footer>
 

@@ -28,6 +28,7 @@ const packages = [
 
     <!-- Hero — terminal session output -->
     <div class="space-y-4 max-w-2xl">
+      <p class="text-[11px] text-muted-foreground/60 select-none">Last login: Sun Mar 15 00:00:00 2026 on ttys001</p>
       <div class="space-y-1">
         <p class="text-xs text-muted-foreground">
           <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
@@ -40,6 +41,7 @@ const packages = [
             built for the Philippine developer community and beyond.
           </p>
         </div>
+        <p class="text-[11px] text-muted-foreground/40 select-none pt-1">[exit 0]</p>
       </div>
     </div>
 
@@ -74,15 +76,18 @@ const packages = [
           </div>
         </RouterLink>
       </div>
+      <p class="text-[11px] text-muted-foreground/40 select-none">[exit 0]</p>
     </div>
 
     <!-- npm Packages -->
     <div class="space-y-4">
-      <p class="text-xs text-muted-foreground">
-        <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
-        <span class="ml-2 text-foreground">ls</span>
-        <span class="ml-1 text-primary">--packages</span>
-      </p>
+      <div>
+        <p class="text-xs text-muted-foreground">
+          <span class="text-foreground">aivangogh@tools</span><span class="text-muted-foreground">:</span><span class="text-primary">~</span><span class="text-muted-foreground">$</span>
+          <span class="ml-2 text-foreground">ls</span>
+          <span class="ml-1 text-primary">--packages</span>
+        </p>
+      </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <a
           v-for="pkg in packages"
@@ -105,6 +110,7 @@ const packages = [
           </div>
         </a>
       </div>
+      <p class="text-[11px] text-muted-foreground/40 select-none">[exit 0]</p>
     </div>
 
   </div>

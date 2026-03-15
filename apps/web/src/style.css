@@ -109,10 +109,42 @@
   50% { opacity: 0; }
 }
 
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 6px currentColor, 0 0 2px currentColor; }
+  50% { text-shadow: 0 0 18px currentColor, 0 0 6px currentColor; }
+}
+
 @layer utilities {
   .cursor-blink::after {
     content: '█';
     margin-left: 3px;
     animation: blink 1.2s step-end infinite;
+  }
+
+  /* Only glow in dark mode */
+  .glow-pulse {
+    animation: none;
+  }
+  .dark .glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  /* Subtle scanline overlay for dark mode */
+  .terminal-scanlines {
+    position: relative;
+  }
+  .dark .terminal-scanlines::before {
+    content: '';
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
   }
 }
