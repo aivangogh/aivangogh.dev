@@ -128,7 +128,7 @@ const snippets = [
             <SnippetTabsTrigger value="bun">bun</SnippetTabsTrigger>
             <SnippetTabsTrigger value="pnpm">pnpm</SnippetTabsTrigger>
           </SnippetTabsList>
-          <SnippetCopyButton :value="installCommands[activeInstall]" />
+          <SnippetCopyButton :value="installCommands[activeInstall] ?? ''" />
         </SnippetHeader>
         <SnippetTabsContent value="npm">
           <code class="block px-4 py-3 text-sm font-mono">npm install @aivangogh/ph-address</code>
