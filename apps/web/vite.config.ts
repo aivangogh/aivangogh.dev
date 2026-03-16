@@ -41,6 +41,9 @@ function workspaceAliasPlugin(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
+  optimizeDeps: {
+    include: ['shiki'],
+  },
   server: {
     fs: {
       allow: [path.resolve(__dirname, '../..')],

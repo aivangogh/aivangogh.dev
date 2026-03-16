@@ -20,6 +20,7 @@
     "axios": "catalog:",
     "lucide-vue-next": "catalog:",
     "marked": "^17.0.4",
+    "shiki": "catalog:",
     "pinia": "catalog:",
     "tw-animate-css": "catalog:",
     "vue": "catalog:",
