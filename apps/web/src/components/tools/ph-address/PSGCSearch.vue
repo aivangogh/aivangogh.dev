@@ -121,7 +121,7 @@ function normalize(s: string): string {
 }
 
 function matches(entry: SearchEntry, q: string): boolean {
-  const haystack = normalize(`${entry.name} ${entry.municipality} ${entry.province} ${entry.region}`)
+  const haystack = normalize(`${entry.code} ${entry.name} ${entry.municipality} ${entry.province} ${entry.region}`)
   return q.split(/\s+/).every((token) => haystack.includes(normalize(token)))
 }
 
@@ -245,7 +245,7 @@ async function copyShareUrl() {
         <SearchIcon class="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none sm:size-4" />
         <Input
           v-model="rawQuery"
-          placeholder="Search barangay, city, province..."
+          placeholder="Search by name or PSGC code..."
           class="pl-9 text-sm"
           :class="rawQuery ? 'pr-8' : ''"
         />
@@ -270,7 +270,7 @@ async function copyShareUrl() {
       </div>
       <div class="space-y-1">
         <p class="text-xs font-medium">Search regions, provinces, cities, and barangays</p>
-        <p class="text-xs text-muted-foreground">Enter at least 2 characters, or pick a scope filter above.</p>
+        <p class="text-xs text-muted-foreground">Search by name or paste a PSGC code to verify what it refers to.</p>
       </div>
     </div>
 
