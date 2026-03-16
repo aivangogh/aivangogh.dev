@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getAllRegions, getAllProvinces } from '@aivangogh/ph-address'
 import AddressSelector from '@/components/tools/ph-address/AddressSelector.vue'
-import BarangaySearch from '@/components/tools/ph-address/BarangaySearch.vue'
+import PSGCSearch from '@/components/tools/ph-address/PSGCSearch.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@aivangogh/ui/components/ui/tabs'
 import { BookOpenIcon, MapPinIcon } from 'lucide-vue-next'
 import TerminalPrompt from '@/components/terminal/TerminalPrompt.vue'
@@ -112,7 +112,7 @@ const snippets = [
         <AddressSelector />
       </TabsContent>
       <TabsContent value="search">
-        <BarangaySearch />
+        <PSGCSearch />
       </TabsContent>
     </Tabs>
 

@@ -3,8 +3,8 @@ import { ref, computed, watch } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { useRoute, useRouter } from 'vue-router'
 import { getAllRegions, getProvincesByRegion, getMunicipalitiesByProvince } from '@aivangogh/ph-address'
-import { getBarangayIndex } from '@/lib/ph-address-index'
-import type { BarangayEntry } from '@/lib/ph-address-index'
+import { getSearchIndex } from '@/lib/ph-address-index'
+import type { SearchEntry } from '@/lib/ph-address-index'
 import { useLockState } from '@/composables/useLockState'
 import { useClipboard } from '@/composables/useClipboard'
 import {
@@ -25,7 +25,7 @@ import {
 import { Badge } from '@aivangogh/ui/components/ui/badge'
 import { Button } from '@aivangogh/ui/components/ui/button'
 import { Input } from '@aivangogh/ui/components/ui/input'
-import { CheckIcon, ChevronLeftIcon, ChevronRightIcon, ClipboardCheckIcon, CopyIcon, RotateCcwIcon, SearchIcon } from 'lucide-vue-next'
+import { CheckIcon, ChevronLeftIcon, ChevronRightIcon, ClipboardCheckIcon, CopyIcon, RotateCcwIcon, SearchIcon, XIcon } from 'lucide-vue-next'
 import FilterDropdown from './FilterDropdown.vue'
 
 const PAGE_SIZE = 50
@@ -116,9 +116,13 @@ const applyQuery = useDebounceFn((val: string) => {
 
 watch(rawQuery, applyQuery)
 
-function matches(entry: BarangayEntry, q: string): boolean {
-  const haystack = `${entry.name} ${entry.municipality} ${entry.province} ${entry.region}`.toLowerCase()
-  return q.split(/\s+/).every((token) => haystack.includes(token))
+function normalize(s: string): string {
+  return s.toLowerCase().replace(/-/g, '')
+}
+
+function matches(entry: SearchEntry, q: string): boolean {
+  const haystack = normalize(`${entry.name} ${entry.municipality} ${entry.province} ${entry.region}`)
+  return q.split(/\s+/).every((token) => haystack.includes(normalize(token)))
 }
 
 // — Pagination —
@@ -128,15 +132,19 @@ watch([query, filterRegion, filterProvince, filterMunicipality], () => {
   currentPage.value = 1
 })
 
-const allResults = computed((): BarangayEntry[] => {
+const allResults = computed((): SearchEntry[] => {
   const q = query.value.trim().toLowerCase()
   const hasQuery = q.length >= 2
   if (!hasQuery && !hasFilter.value) return []
-  const out: BarangayEntry[] = []
-  for (const entry of getBarangayIndex()) {
+  const out: SearchEntry[] = []
+  for (const entry of getSearchIndex()) {
     if (filterRegion.value && entry.regionCode !== filterRegion.value) continue
     if (filterProvince.value && entry.provinceCode !== filterProvince.value) continue
     if (filterMunicipality.value && entry.municipalityCode !== filterMunicipality.value) continue
+    // When a scope filter is active, hide entries at or above that scope level
+    if (filterMunicipality.value && (entry.level === 'region' || entry.level === 'province' || entry.level === 'municipality')) continue
+    if (filterProvince.value && !filterMunicipality.value && (entry.level === 'region' || entry.level === 'province')) continue
+    if (filterRegion.value && !filterProvince.value && entry.level === 'region') continue
     if (hasQuery && !matches(entry, q)) continue
     out.push(entry)
   }
@@ -239,7 +247,16 @@ async function copyShareUrl() {
           v-model="rawQuery"
           placeholder="Search barangay, city, province..."
           class="pl-9 text-sm"
+          :class="rawQuery ? 'pr-8' : ''"
         />
+        <button
+          v-if="rawQuery"
+          type="button"
+          class="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+          @click="rawQuery = ''"
+        >
+          <XIcon class="size-3.5" />
+        </button>
       </div>
     </CardHeader>
 
@@ -252,7 +269,7 @@ async function copyShareUrl() {
         <SearchIcon class="size-5 text-muted-foreground" />
       </div>
       <div class="space-y-1">
-        <p class="text-xs font-medium">Search across 42,000+ barangays</p>
+        <p class="text-xs font-medium">Search regions, provinces, cities, and barangays</p>
         <p class="text-xs text-muted-foreground">Enter at least 2 characters, or pick a scope filter above.</p>
       </div>
     </div>
@@ -283,9 +300,8 @@ async function copyShareUrl() {
         <Table>
           <TableHeader>
             <TableRow class="hover:bg-transparent">
-              <TableHead class="text-xs">Barangay</TableHead>
-              <TableHead class="text-xs">Mun. / City</TableHead>
-              <TableHead class="hidden text-xs sm:table-cell">Province</TableHead>
+              <TableHead class="text-xs">Name</TableHead>
+              <TableHead class="text-xs">Location</TableHead>
               <TableHead class="pr-2 text-right text-xs">PSGC Code</TableHead>
               <TableHead class="w-8" />
             </TableRow>
@@ -296,9 +312,17 @@ async function copyShareUrl() {
               :key="row.code"
               class="group hover:bg-muted/40"
             >
-              <TableCell class="text-xs font-medium">{{ row.name }}</TableCell>
-              <TableCell class="text-xs text-muted-foreground">{{ row.municipality }}</TableCell>
-              <TableCell class="hidden text-xs text-muted-foreground sm:table-cell">{{ row.province }}</TableCell>
+              <TableCell class="text-xs font-medium">
+                <div class="flex items-center gap-1.5">
+                  <Badge variant="outline" class="text-[10px] px-1 py-0 h-4 shrink-0 capitalize">{{ row.level }}</Badge>
+                  <span>{{ row.name }}</span>
+                </div>
+              </TableCell>
+              <TableCell class="text-xs text-muted-foreground">
+                <template v-if="row.level === 'barangay'">{{ row.municipality }} · {{ row.province }} · {{ row.region }}</template>
+                <template v-else-if="row.level === 'municipality'">{{ row.province }} · {{ row.region }}</template>
+                <template v-else-if="row.level === 'province'">{{ row.region }}</template>
+              </TableCell>
               <TableCell class="pr-2 text-right">
                 <code class="font-mono text-xs font-semibold tabular-nums tracking-widest">
                   {{ row.code }}
