@@ -1,5 +1,6 @@
 import { animated } from '../types'
 import type { CommandRegistry } from '../types'
+import { getPageViewCount } from '@/composables/usePageViews'
 
 const BANNER = [
   '┌────────────────────────────────────────────────────────────┐',
@@ -78,6 +79,7 @@ export const commands: CommandRegistry = {
       '  date        — Show current date and time',
       '  history     — Show command history',
       '  neofetch    — System info with ASCII art',
+      '  pageviews   — Show site page view count',
       '  projects    — List open-source projects',
       '  skills      — Tech stack and skills',
       '  whoami      — Who are you?',
@@ -170,6 +172,15 @@ export const commands: CommandRegistry = {
   date: {
     description: 'Show current date and time',
     execute: () => new Date().toString(),
+  },
+
+  pageviews: {
+    description: 'Show site page view count',
+    execute: () => {
+      const n = getPageViewCount()
+      if (n === null) return 'Page view count unavailable.'
+      return `aivangogh.tools — ${n.toLocaleString()} total page views`
+    },
   },
 
   echo: {

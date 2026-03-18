@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { usePageViews } from '@/composables/usePageViews'
+
+const { count } = usePageViews()
 </script>
 
 <template>
@@ -49,6 +52,10 @@ import { RouterLink } from 'vue-router'
           <span class="text-foreground/60 hidden sm:inline">main</span>
         </div>
         <div class="flex items-center gap-2 text-[11px] text-muted-foreground shrink-0">
+          <span v-if="count !== null" class="hidden sm:inline text-muted-foreground/60">
+            {{ count.toLocaleString() }} views
+          </span>
+          <span v-if="count !== null" class="opacity-40 hidden sm:inline">|</span>
           <span class="hidden sm:inline">vue3 + shadcn-vue</span>
           <span class="opacity-40 hidden sm:inline">|</span>
           <RouterLink
