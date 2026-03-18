@@ -12,8 +12,8 @@ async function fetch_count(): Promise<void> {
   try {
     const res = await fetch(COUNTER_URL)
     if (!res.ok) return
-    const data = await res.json() as { value: number }
-    count.value = data.value
+    const data = await res.json() as { count: number }
+    count.value = data.count
   } catch {
     // silently fail — counter is non-critical
   }
