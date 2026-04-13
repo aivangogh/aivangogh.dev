@@ -12,7 +12,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
-    "@aivangogh/ph-address": "^2025.4.1",
+    "@aivangogh/ph-address": "^2025.4.3",
     "@tanstack/vue-query": "catalog:",
     "@unhead/vue": "catalog:",
     "@vee-validate/zod": "catalog:",
@@ -20,8 +20,8 @@
     "axios": "catalog:",
     "lucide-vue-next": "catalog:",
     "marked": "^17.0.4",
-    "shiki": "catalog:",
     "pinia": "catalog:",
+    "shiki": "catalog:",
     "tw-animate-css": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:",
