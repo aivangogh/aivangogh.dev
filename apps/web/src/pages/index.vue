@@ -33,7 +33,7 @@ const packages = [
       <div class="space-y-1">
         <TerminalPrompt command="whoami" :delay="0" />
         <div class="pl-4 pt-1 space-y-2 border-l border-border">
-          <h1 class="text-3xl font-bold text-foreground cursor-blink tracking-tight">aivangogh</h1>
+          <h1 class="text-3xl font-bold text-foreground cursor-blink tracking-tight">aivangogh.dev</h1>
           <p class="text-sm text-muted-foreground leading-relaxed">
             open-source tools, Vue components, and npm packages<br>
             built for the Philippine developer community and beyond.

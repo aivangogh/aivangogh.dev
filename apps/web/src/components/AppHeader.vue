@@ -5,7 +5,7 @@
         to="/"
         class="text-sm flex items-center gap-0 hover:opacity-80 transition-opacity"
       >
-        <span class="text-muted-foreground select-none">~/</span><span class="glow-pulse text-foreground font-semibold">aivangogh</span>
+        <span class="text-muted-foreground select-none">~/</span><span class="glow-pulse text-foreground font-semibold">aivangogh.dev</span>
       </RouterLink>
       <nav class="flex items-center gap-3">
         <a

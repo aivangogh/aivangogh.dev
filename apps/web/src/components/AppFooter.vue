@@ -11,7 +11,7 @@ const { count } = usePageViews()
       <div class="flex items-center gap-2 text-[11px] text-muted-foreground min-w-0">
         <span class="text-primary font-semibold shrink-0">NORMAL</span>
         <span class="opacity-40 shrink-0">|</span>
-        <span class="truncate">~/aivangogh</span>
+        <span class="truncate">~/aivangogh.dev</span>
         <span class="opacity-40 shrink-0 hidden sm:inline">|</span>
         <span class="text-foreground/60 hidden sm:inline">main</span>
       </div>
@@ -28,7 +28,7 @@ const { count } = usePageViews()
           active-class="text-foreground"
         >[terminal]</RouterLink>
         <span class="opacity-40">|</span>
-        <span>© 2026 aivangogh</span>
+        <span>© 2026 aivangogh.dev</span>
       </div>
     </div>
   </footer>

@@ -1,21 +1,24 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const props = withDefaults(defineProps<{
-  user?: string
-  host?: string
-  path?: string
-  command: string
-  args?: string
-  delay?: number
-  speed?: number
-}>(), {
-  user: 'aivangogh',
-  host: 'tools',
-  path: '~',
-  delay: 0,
-  speed: 70,
-})
+const props = withDefaults(
+  defineProps<{
+    user?: string
+    host?: string
+    path?: string
+    command: string
+    args?: string
+    delay?: number
+    speed?: number
+  }>(),
+  {
+    user: 'aivangogh.dev',
+    host: 'tools',
+    path: '~',
+    delay: 0,
+    speed: 70,
+  },
+)
 
 const emit = defineEmits<{ done: [] }>()
 
